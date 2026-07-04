@@ -44,7 +44,7 @@ export default function CtaSection() {
 
             <button
               onClick={() => {}}
-              className="bg-yellow-500 px-6 py-3 text-base font-semibold text-neutral-900 shadow-[0_0_30px_rgba(234,179,8,0.35)] transition hover:bg-yellow-400"
+              className="bg-yellow-500 px-6 py-3 text-base font-semibold text-neutral-900 transition hover:bg-yellow-400"
             >
               Buy Now
             </button>
