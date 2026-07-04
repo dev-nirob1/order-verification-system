@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 import { FiPlus } from "react-icons/fi";
 
@@ -42,24 +43,26 @@ export const gallery = [
 
 export default function Gallery() {
   return (
-    <section className="w-full bg-[var(--background)] py-24" id="gallery">
-      <div className="mx-auto max-w-6xl px-6">
+    <section className="w-full bg-(--background) py-24" id="gallery">
+      <div className="mx-auto max-w-6xl">
         <div className="mb-14 text-center">
           <span className="text-xs font-semibold uppercase tracking-[0.3em] text-yellow-500">
             Design Architecture
           </span>
-          <h2 className="mt-3 text-3xl font-semibold text-[var(--foreground)] sm:text-4xl">
+          <h2 className="mt-3 text-3xl font-semibold text-(--foreground) sm:text-4xl">
             The Art of Chronometry
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {gallery.map((item) => (
             <div
               key={item.title}
-              className="group relative aspect-square overflow-hidden rounded-xl border border-white/10"
+              className="group relative aspect-square overflow-hidden border border-white/10"
             >
-              <img
+              <Image
+              width={400}
+              height={400}
                 src={item.src}
                 alt={item.alt}
                 className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
@@ -81,7 +84,7 @@ export default function Gallery() {
                 className="absolute inset-0 bg-gradient-to-t from-[rgba(11,11,11,0.92)] via-[rgba(11,11,11,0.2)] to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
               />
               <div className="absolute inset-x-0 bottom-0 translate-y-2 p-6 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
-                <h3 className="text-lg font-semibold text-[var(--foreground)]">
+                <h3 className="text-lg font-semibold text-(--foreground)">
                   {item.title}
                 </h3>
                 <p className="mt-1.5 max-w-xs text-sm leading-relaxed text-neutral-300">
