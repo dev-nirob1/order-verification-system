@@ -1,0 +1,11 @@
+
+const SuccessPage = () => {
+    return (
+        <div>
+            <h1>Success!</h1>
+            <p>Your order has been placed successfully.</p>
+        </div>
+    );
+};
+
+export default SuccessPage;
