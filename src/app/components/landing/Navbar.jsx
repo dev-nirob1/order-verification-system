@@ -73,7 +73,7 @@ const Navbar = () => {
             href="#buy"
             className="hidden border border-yellow-500 px-5 py-2 text-sm font-medium uppercase tracking-wide text-yellow-500 transition-all duration-300 hover:bg-yellow-500 hover:text-black lg:block"
           >
-            Pre-Order
+            Buy Now
           </a>
 
           {/* Mobile Menu Button */}
@@ -110,7 +110,7 @@ const Navbar = () => {
             onClick={() => setMenuOpen(false)}
             className="mt-6 border border-yellow-500 px-8 py-3 text-sm font-medium uppercase tracking-wider text-yellow-500 transition hover:bg-yellow-500 hover:text-black"
           >
-            Pre-Order
+            Buy Now
           </a>
         </nav>
       </div>
