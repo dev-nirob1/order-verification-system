@@ -6,6 +6,7 @@ import Hero from "../components/landing/Hero";
 import Specification from "../components/landing/Specification";
 import Testimonials from "../components/landing/Testimonials";
 import Gallery from "../components/landing/Gallery";
+import Craftsmanship from "../components/landing/Craftmanship";
 
 const LandingPage = () => {
     return (
@@ -16,6 +17,7 @@ const LandingPage = () => {
             <Gallery/>
             <Specification/>
             <FaqSection/>
+            <Craftsmanship />
             <Testimonials/>
             <CtaSection/>
         </div>
