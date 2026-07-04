@@ -1,4 +1,5 @@
 import CounterSection from "../components/landing/CounterSection";
+import Features from "../components/landing/Features";
 import Hero from "../components/landing/Hero";
 
 const LandingPage = () => {
@@ -6,6 +7,7 @@ const LandingPage = () => {
         <div>
             <Hero />
             <CounterSection />
+            <Features/>
         </div>
     );
 };
