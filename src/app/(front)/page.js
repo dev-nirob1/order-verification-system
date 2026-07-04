@@ -7,6 +7,7 @@ import Specification from "../components/landing/Specification";
 import Testimonials from "../components/landing/Testimonials";
 import Gallery from "../components/landing/Gallery";
 import Craftsmanship from "../components/landing/Craftmanship";
+import OrderForm from "../components/landing/Order";
 
 const LandingPage = () => {
     return (
@@ -19,6 +20,7 @@ const LandingPage = () => {
             <FaqSection/>
             <Craftsmanship />
             <Testimonials/>
+            <OrderForm/>
             <CtaSection/>
         </div>
     );
