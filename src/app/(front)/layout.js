@@ -1,7 +1,7 @@
-import Footer from "../components/landing/Footer";
-import Navbar from "../components/landing/Navbar";
+import Footer from "../components/front/Footer";
+import Navbar from "../components/front/Navbar";
 import { SidebarProvider } from "../context/SidebarContext";
-import Sidebar from "../components/landing/Sidebar";
+import Sidebar from "../components/front/Sidebar";
 
 export default function FrontLayout({ children }) {
     return (
@@ -9,8 +9,8 @@ export default function FrontLayout({ children }) {
             <div>
                 <Navbar />
                 {children}
-                <Sidebar />
-                <Footer />
+                {/* <Sidebar /> */}
+                {/* <Footer /> */}
             </div>
         </SidebarProvider>
     );

@@ -1,18 +1,18 @@
-import CounterSection from "../components/landing/CounterSection";
-import CtaSection from "../components/landing/CtaSection";
-import FaqSection from "../components/landing/FaqSection";
-import Features from "../components/landing/Features";
-import Hero from "../components/landing/Hero";
-import Specification from "../components/landing/Specification";
-import Testimonials from "../components/landing/Testimonials";
-import Gallery from "../components/landing/Gallery";
-import Craftsmanship from "../components/landing/Craftmanship";
-import OrderForm from "../components/landing/Order";
+import CounterSection from "../components/front/CounterSection";
+import CtaSection from "../components/front/CtaSection";
+import FaqSection from "../components/front/FaqSection";
+import Features from "../components/front/Features";
+import Hero from "../components/front/Hero";
+import Specification from "../components/front/Specification";
+import Testimonials from "../components/front/Testimonials";
+import Gallery from "../components/front/Gallery";
+import Craftsmanship from "../components/front/Craftmanship";
+import OrderForm from "../components/front/Order";
 
 const LandingPage = () => {
     return (
         <div>
-            <Hero />
+            {/* <Hero />
             <CounterSection />
             <Features/>
             <Gallery/>
@@ -21,7 +21,7 @@ const LandingPage = () => {
             <Craftsmanship />
             <Testimonials/>
             <OrderForm/>
-            <CtaSection/>
+            <CtaSection/> */}
         </div>
     );
 };
