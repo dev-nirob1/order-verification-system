@@ -19,8 +19,8 @@ const LandingPage = () => {
             <Specification/>
             <FaqSection/>
            <Craftsmanship />
-           {/*   <Testimonials/>
-            <OrderForm/>
+              <Testimonials/>
+           {/* <OrderForm/>
             <CtaSection/> */}
         </div>
     );
