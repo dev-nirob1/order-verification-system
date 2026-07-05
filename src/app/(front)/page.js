@@ -14,8 +14,8 @@ const LandingPage = () => {
         <div>
             <Hero />
              <CounterSection />
-            {/*  <Features/>
-            <Gallery/>
+            <Features/>
+            {/*  <Gallery/>
             <Specification/>
             <FaqSection/>
             <Craftsmanship />

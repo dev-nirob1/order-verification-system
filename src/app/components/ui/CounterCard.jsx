@@ -1,4 +1,3 @@
-
 const CounterCard = ({data}) => {
     return (
         <div className="flex flex-col items-center justify-center text-center gap-3 px-6 py-8 border border-white/10 bg-(--foreground)">

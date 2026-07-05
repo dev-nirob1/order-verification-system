@@ -1,4 +1,4 @@
-import CounterCard from "./CounterCard";
+import CounterCard from "../ui/CounterCard";
 
 const CounterSection = () => {
   const metrics = [
