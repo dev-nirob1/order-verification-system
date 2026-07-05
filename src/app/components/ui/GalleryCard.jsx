@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { FiPlus } from "react-icons/fi";
 
-const GalleryCard = ({ item }) => {
+const GalleryCard = ({item}) => {
   return (
     <div className="group relative aspect-square overflow-hidden border border-white/10">
       <Image
@@ -22,11 +22,11 @@ const GalleryCard = ({ item }) => {
         </button>
 
         <div className="absolute inset-x-0 bottom-0 translate-y-2 p-6 transition-transform duration-300 group-hover:translate-y-0">
-          <h5 className="text-lg font-semibold text-white">{item.title}</h5>
-          <p
-            className="mt-1.5 
-          leading-relaxed text-neutral-300"
-          >
+          <h5 className="text-lg font-semibold text-white">
+            {item.title}
+          </h5>
+          <p className="mt-1.5 
+          leading-relaxed text-neutral-300">
             {item.desc}
           </p>
         </div>
