@@ -7,20 +7,22 @@ import Specification from "../components/front/Specification";
 import Testimonials from "../components/front/Testimonials";
 import Gallery from "../components/front/Gallery";
 import Craftsmanship from "../components/front/Craftmanship";
-import OrderForm from "../components/front/Order";
+import Sidebar from "../components/front/CheckoutSidebar";
+// import OrderForm from "../components/front/Order";
 
 const LandingPage = () => {
     return (
         <div>
             <Hero />
-             <CounterSection />
-            <Features/>
-             <Gallery/>
-            <Specification/>
-            <FaqSection/>
-           <Craftsmanship />
-              <Testimonials/>
-           {/* <OrderForm/>
+            <CounterSection />
+            <Features />
+            <Gallery />
+            <Specification />
+            <FaqSection />
+            <Craftsmanship />
+            <Testimonials />
+            <Sidebar/>
+            {/* <OrderForm/>
             <CtaSection/> */}
         </div>
     );

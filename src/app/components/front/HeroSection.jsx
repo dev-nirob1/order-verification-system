@@ -1,7 +1,10 @@
+'use client'
 import Image from "next/image";
 import SectionHeader from "../common/SectionHeader";
+import { useCheckout } from "@/app/hooks/useCheckout";
 
 const Hero = () => {
+  const {openCheckout} = useCheckout();
   return (
     <section className="relative min-h-screen py-16">
       {/* background image */}
@@ -37,7 +40,10 @@ const Hero = () => {
 
         {/* action buttons */}
         <div className="mt-8 flex flex-col gap-4 sm:flex-row">
-          <button className="bg-yellow-500 px-7 py-3 font-semibold uppercase text-neutral-900 transition hover:bg-yellow-400">
+          <button 
+            className="bg-yellow-500 px-7 py-3 font-semibold uppercase text-neutral-900 transition hover:bg-yellow-400"
+            onClick={openCheckout}
+          >
             Buy Now
           </button>
 
