@@ -1,6 +1,7 @@
-'use client'
+"use client";
 import { useState } from "react";
-import { FiPlus, FiMinus } from "react-icons/fi";
+import SectionHeader from "../common/SectionHeader";
+import Accordion from "../ui/Accordion";
 
 const faqs = [
   {
@@ -31,83 +32,38 @@ const faqs = [
 ];
 
 const FaqSection = () => {
-  const [open, setOpen] = useState(0);
+  const [openIndex, setOpenIndex] = useState(0); // 0 = first item open by default, null = all closed
+
+  const onToggle = (index) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
 
   return (
-    <section id="faq" className="bg-[#0b0b0b] py-28">
-      <div className="mx-auto grid max-w-7xl gap-16 px-6 lg:grid-cols-[0.9fr_1.3fr] lg:px-10">
+    <section id="faq" className="py-16">
+      <div className="mx-auto grid max-w-7xl gap-16 px-6 grid-cols-2 lg:px-0">
         {/* Left Side */}
-        <div className="lg:sticky lg:top-28 h-fit">
-          <span className="text-sm uppercase tracking-[4px] text-yellow-500">
-            Concierge
-          </span>
+        <div className="lg:sticky lg:top-28">
+          <SectionHeader
+            title="Frequently Asked Questions"
+            subtitle="Concierge"
+          />
 
-          <h2 className="mt-5 text-5xl font-bold leading-tight text-white">
-            Frequently
-            <br />
-            Asked Questions
-          </h2>
-
-          <p className="mt-6 max-w-md text-gray-400 leading-8">
-            Everything you need to know before reserving your Aurex
-            timepiece. If you still have questions, our concierge team is
-            available 24/7.
+          <p className="mt-6 text-base text-gray-400 leading-8">
+            Everything you need to know before reserving your Aurex timepiece.
+            If you still have questions, our concierge team is available 24/7.
           </p>
         </div>
 
         {/* Right Side */}
         <div className="space-y-5">
-          {faqs.map((faq, index) => {
-            const active = open === index;
-
-            return (
-              <div
-                key={index}
-                className={`overflow-hidden border transition-all duration-300 ${
-                  active
-                    ? "border-yellow-500/40 bg-yellow-500/5"
-                    : "border-white/10 bg-white/[0.03] hover:border-white/20"
-                }`}
-              >
-                <button
-                  onClick={() =>
-                    setOpen(active ? -1 : index)
-                  }
-                  className="flex w-full items-center justify-between px-8 py-7 text-left"
-                >
-                  <h3
-                    className={`text-lg font-semibold transition ${
-                      active ? "text-yellow-500" : "text-white"
-                    }`}
-                  >
-                    {faq.question}
-                  </h3>
-
-                  <div
-                    className={`text-xl transition ${
-                      active ? "text-yellow-500 rotate-180" : "text-gray-500"
-                    }`}
-                  >
-                    {active ? <FiMinus /> : <FiPlus />}
-                  </div>
-                </button>
-
-                <div
-                  className={`grid transition-all duration-500 ${
-                    active
-                      ? "grid-rows-[1fr]"
-                      : "grid-rows-[0fr]"
-                  }`}
-                >
-                  <div className="overflow-hidden">
-                    <p className="px-8 pb-8 leading-8 text-gray-400">
-                      {faq.answer}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
+          {faqs.map((faq, index) => (
+            <Accordion
+              key={index}
+              faq={faq}
+              active={openIndex === index}
+              onToggle={() => onToggle(index)}
+            />
+          ))}
         </div>
       </div>
     </section>
