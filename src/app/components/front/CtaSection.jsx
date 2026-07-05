@@ -1,56 +1,57 @@
-'use client'
+import Image from "next/image";
 import SectionHeader from "../common/SectionHeader";
 
-export default function CtaSection() {
+const Hero = () => {
   return (
-    <section
-      className="relative w-full bg-(--background) bg-cover bg-no-repeat bg-right px-6 py-24 lg:py-32"
-      style={{ backgroundImage: "url('/cta-banner-gpt.png')" }}
-      id="buy"
-    >
-      {/* left-to-right dark overlay so text stays readable over the image */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0"
-        style={{
-          background:
-            "linear-gradient(90deg, rgba(11,11,11,0.95) 0%, rgba(11,11,11,0.75) 35%, rgba(11,11,11,0.15) 65%, rgba(11,11,11,0) 100%)",
-        }}
+    <section className="relative min-h-screen py-16">
+      {/* background image */}
+      <Image
+        src="/cta-banner-gpt.png"
+        alt=""
+        fill
+        priority
+        className="-z-10 object-cover"
       />
+      {/* dark gradient so text stays readable over the photo */}
+      <div className="absolute inset-0 -z-10 bg-linear-to-r from-neutral-950 via-neutral-950/70 to-neutral-800/5" />
 
-      <div className="relative mx-auto max-w-6xl">
-        <div className="max-w-xl">
-            <SectionHeader title="Claim Your Signature Piece" subtitle="Limited Edition Release" />
+      <div className="mx-auto flex min-h-[calc(100vh-8rem)] max-w-7xl flex-col justify-center px-6 lg:px-0">
+        <SectionHeader
+          title="Claim Your Signature Piece"
+          subtitle="Limited Edition Release"
+        />
 
-          <p className="mt-6 max-w-md text-lg font-light leading-relaxed text-neutral-400">
-            Aurex is released in limited series of 500 units per batch.
-            Reserve your Swiss-made chronograph today and receive a
-            premium leather display case and 5-year international
-            warranty.
-          </p>
+        <p className="mx-auto max-w-md text-lg leading-relaxed text-neutral-400 lg:mx-0 mt-4">
+          Crafted with sapphire crystal, stainless steel, and Swiss precision,
+          for those who value every second.
+        </p>
 
-          <div className="mt-12 flex flex-col items-start gap-8 sm:flex-row sm:items-center sm:gap-10">
-            <div className="flex flex-col items-start">
-              <span className="font-mono text-lg text-white/30 line-through">
-                $3,200
-              </span>
-              <span className="flex items-center gap-3 font-mono text-3xl font-bold text-(--foreground) sm:text-4xl">
-                $2,450
-                {/* <span className=" bg-yellow-500 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-neutral-900">
-                  Launch Offer
-                </span> */}
-              </span>
-            </div>
-
-            <button
-              onClick={() => {}}
-              className="bg-yellow-500 px-6 py-3 text-base font-semibold text-neutral-900 transition hover:bg-yellow-400"
-            >
-              Buy Now
-            </button>
-          </div>
+        {/* Price */}
+        <div className="mt-6 flex items-baseline gap-3">
+          <span className="text-4xl font-bold text-white">$1,240</span>
+          <span className="text-lg text-neutral-500 line-through">$1,550</span>
+          <span className="border border-yellow-500/40 bg-yellow-500/10 px-2 py-0.5 text-xs font-medium uppercase tracking-wide text-yellow-500">
+            Save 20%
+          </span>
         </div>
+
+        {/* action buttons */}
+        <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+          <button className="bg-yellow-500 px-7 py-3 font-semibold uppercase text-neutral-900 transition hover:bg-yellow-400">
+            Buy Now
+          </button>
+
+          <button className="border border-yellow-500 px-7 py-3 uppercase text-yellow-500 transition hover:bg-yellow-500 hover:text-neutral-900">
+            See Details
+          </button>
+        </div>
+
+        <p className="mt-4 text-xs uppercase tracking-wide text-neutral-500">
+          Only 42 pieces remaining · Free worldwide shipping
+        </p>
       </div>
     </section>
   );
-}
+};
+
+export default Hero;

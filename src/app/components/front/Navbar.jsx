@@ -42,8 +42,7 @@ const Navbar = () => {
 
         <div>
           <button className="border border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-gray-900 px-5 py-2">
-            {" "}
-            BUY NOW{" "}
+            BUY NOW
           </button>
         </div>
 
