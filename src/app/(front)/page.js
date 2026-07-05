@@ -1,8 +1,8 @@
 import CounterSection from "../components/front/CounterSection";
-import CtaSection from "../components/front/CtaSection";
+import CtaSection from "../components/front/HeroSection";
 import FaqSection from "../components/front/FaqSection";
 import Features from "../components/front/Features";
-import Hero from "../components/front/CtaSection";
+import Hero from "../components/front/HeroSection";
 import Specification from "../components/front/Specification";
 import Testimonials from "../components/front/Testimonials";
 import Gallery from "../components/front/Gallery";
@@ -13,8 +13,8 @@ const LandingPage = () => {
     return (
         <div>
             <Hero />
-            {/*   <CounteraSection />
-            <Features/>
+             <CounterSection />
+            {/*  <Features/>
             <Gallery/>
             <Specification/>
             <FaqSection/>
