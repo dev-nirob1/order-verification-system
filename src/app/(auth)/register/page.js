@@ -1,4 +1,5 @@
 'use client'
+import Link from "next/link";
 import React, { useState } from "react";
 import { FiEye, FiEyeOff, FiUser, FiPhone, FiLock } from "react-icons/fi";
 
@@ -46,24 +47,18 @@ const Signup = () => {
   };
 
   return (
-    <section className="flex min-h-screen w-full items-center justify-center bg-[var(--background)] px-6 py-16">
+    <section className="flex min-h-screen w-full items-center justify-center px-6 lg:px-0 py-16">
       <div className="w-full max-w-md">
         {/* brand mark */}
         <div className="mb-10 flex flex-col items-center text-center">
-          <span className="text-sm font-semibold tracking-[0.3em] text-[var(--foreground)]">
-            AUREX
-          </span>
-          <h1 className="mt-4 text-2xl font-semibold text-[var(--foreground)] sm:text-3xl">
+          <h1 className="mt-4 text-2xl font-semibold text-white sm:text-3xl">
             Create Your Account
           </h1>
-          <p className="mt-2 text-sm text-neutral-400">
-            Join Aurex to track orders and save your details.
-          </p>
         </div>
 
         <form
           onSubmit={handleSubmit}
-          className="flex flex-col gap-5 rounded-xl border border-white/10 bg-white/5 p-8 backdrop-blur-md sm:p-10"
+          className="flex flex-col gap-4 bg-(--foreground) border border-white/10 p-8 backdrop-blur-md sm:p-10"
         >
           {/* name */}
           <div>
@@ -81,7 +76,7 @@ const Signup = () => {
                 value={form.name}
                 onChange={handleChange}
                 placeholder="John Doe"
-                className={`w-full rounded-md border bg-white/5 py-3 pl-11 pr-4 text-sm text-[var(--foreground)] outline-none transition-colors placeholder:text-white/25 focus:border-yellow-500 ${
+                className={`w-full border bg-white/5 py-3 pl-11 pr-4 text-sm text-white outline-none transition-colors placeholder:text-white/25 focus:border-yellow-500 ${
                   errors.name ? "border-red-500/60" : "border-white/15"
                 }`}
               />
@@ -107,7 +102,7 @@ const Signup = () => {
                 value={form.phone}
                 onChange={handleChange}
                 placeholder="01XXXXXXXXX"
-                className={`w-full rounded-md border bg-white/5 py-3 pl-11 pr-4 text-sm text-[var(--foreground)] outline-none transition-colors placeholder:text-white/25 focus:border-yellow-500 ${
+                className={`w-full rounded-md border bg-white/5 py-3 pl-11 pr-4 text-sm text-white outline-none transition-colors placeholder:text-white/25 focus:border-yellow-500 ${
                   errors.phone ? "border-red-500/60" : "border-white/15"
                 }`}
               />
@@ -133,7 +128,7 @@ const Signup = () => {
                 value={form.password}
                 onChange={handleChange}
                 placeholder="••••••••"
-                className={`w-full rounded-md border bg-white/5 py-3 pl-11 pr-11 text-sm text-[var(--foreground)] outline-none transition-colors placeholder:text-white/25 focus:border-yellow-500 ${
+                className={`w-full border bg-white/5 py-3 pl-11 pr-11 text-sm text-white outline-none transition-colors placeholder:text-white/25 focus:border-yellow-500 ${
                   errors.password ? "border-red-500/60" : "border-white/15"
                 }`}
               />
@@ -166,7 +161,7 @@ const Signup = () => {
                 value={form.confirmPassword}
                 onChange={handleChange}
                 placeholder="••••••••"
-                className={`w-full rounded-md border bg-white/5 py-3 pl-11 pr-11 text-sm text-[var(--foreground)] outline-none transition-colors placeholder:text-white/25 focus:border-yellow-500 ${
+                className={`w-full border bg-white/5 py-3 pl-11 pr-11 text-sm text-white outline-none transition-colors placeholder:text-white/25 focus:border-yellow-500 ${
                   errors.confirmPassword
                     ? "border-red-500/60"
                     : "border-white/15"
@@ -189,19 +184,19 @@ const Signup = () => {
 
           <button
             type="submit"
-            className="mt-2 w-full rounded-md bg-yellow-500 py-3.5 text-sm font-semibold text-neutral-900 transition hover:bg-yellow-400"
+            className="mt-2 w-full bg-yellow-500 py-3.5 text-sm font-semibold text-neutral-900 transition hover:bg-yellow-400"
           >
             Create Account
           </button>
 
           <p className="text-center text-sm text-neutral-400">
-            Already have an account?{" "}
-            <a
+            Already have an account?
+            <Link
               href="/login"
               className="font-semibold text-yellow-500 transition hover:text-yellow-400"
             >
               Sign in
-            </a>
+            </Link>
           </p>
         </form>
       </div>

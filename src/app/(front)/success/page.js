@@ -3,10 +3,10 @@ import { FiCheckCircle, FiMapPin, FiLogIn } from "react-icons/fi";
 
 const SuccessPage = () => {
   return (
-    <section className="min-h-screen w-full bg-[#0B0B0B] flex items-center justify-center px-6 py-24">
-      <div className="flex flex-col items-center text-center max-w-md w-full">
+    <section className="min-h-screen w-full flex items-center justify-center px-6">
+      <div className="flex flex-col gap-4 items-center text-center max-w-md w-full">
         {/* Animated Check Icon */}
-        <div className="relative mb-8">
+        <div className="relative">
           <div className="absolute inset-0 bg-yellow-500/10 blur-2xl rounded-full scale-150" />
           <div className="relative flex h-24 w-24 items-center justify-center border border-yellow-500/30 bg-yellow-500/5">
             <FiCheckCircle size={44} className="text-yellow-500" />
@@ -14,18 +14,16 @@ const SuccessPage = () => {
         </div>
 
         {/* Title */}
-        <h1 className="text-3xl font-bold uppercase tracking-[3px] text-white mb-3">
+        <h1 className="text-3xl font-bold uppercase tracking-[3px] text-white">
           Order Placed!
         </h1>
 
         {/* Message */}
-        <p className="text-sm text-neutral-400 leading-relaxed mb-2">
+        <p className="text-sm text-neutral-400 leading-relaxed">
           Thank you for your purchase. Your order has been received and is now
           being processed by our team.
         </p>
 
-        {/* Divider */}
-        <div className="my-8 w-full border-t border-white/10" />
 
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 w-full">
@@ -45,11 +43,6 @@ const SuccessPage = () => {
             Login
           </Link>
         </div>
-
-        {/* Footer Note */}
-        <p className="mt-8 text-[11px] uppercase tracking-widest text-neutral-600">
-          AUREX<span className="text-yellow-500">.</span> — Premium Orders
-        </p>
       </div>
     </section>
   );

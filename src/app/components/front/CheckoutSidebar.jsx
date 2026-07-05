@@ -1,7 +1,7 @@
 "use client";
-
 import { HiX } from "react-icons/hi";
 import { useCheckout } from "@/app/hooks/useCheckout";
+import OrderForm from "./OrdersForm";
 
 const CheckoutSidebar = () => {
   const { isOpen, closeCheckout } = useCheckout();
@@ -41,7 +41,7 @@ const CheckoutSidebar = () => {
         {/* Content */}
         <div className="h-[calc(100vh-85px)] overflow-y-auto p-6">
           <div className="flex h-full items-center justify-center">
-            <p className="text-gray-300">Checkout content goes here...</p>
+            <OrderForm/>
           </div>
         </div>
       </aside>

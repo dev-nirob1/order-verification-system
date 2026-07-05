@@ -79,11 +79,11 @@ const TrackOrderPage = () => {
   };
 
   return (
-    <section className="min-h-screen w-full bg-[#0B0B0B] px-6 py-24">
+    <section className="min-h-screen w-full flex items-center justify-center px-6 py-16">
       <div className="mx-auto max-w-xl w-full">
 
         {/* Page Header */}
-        <div className="mb-10 text-center">
+        <div className="mb-6 text-center">
           <div className="relative inline-flex mb-6">
             <div className="absolute inset-0 bg-yellow-500/10 blur-2xl scale-150" />
             <div className="relative flex h-16 w-16 items-center justify-center border border-yellow-500/30 bg-yellow-500/5">
@@ -106,9 +106,8 @@ const TrackOrderPage = () => {
             onChange={(e) => setInputValue(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder="e.g. ORD-20260705-001"
-            className={`flex-1 border bg-white/5 px-5 py-3.5 text-sm text-white outline-none transition-colors placeholder:text-white/25 focus:border-yellow-500 rounded-none ${
-              error ? "border-red-500/60" : "border-white/15"
-            }`}
+            className={`flex-1 border bg-white/5 px-5 py-3.5 text-sm text-white outline-none transition-colors placeholder:text-white/25 focus:border-yellow-500 rounded-none ${error ? "border-red-500/60" : "border-white/15"
+              }`}
           />
           <button
             onClick={handleTrack}
@@ -132,34 +131,14 @@ const TrackOrderPage = () => {
         {/* Error Message */}
         {error && (
           <div className="flex items-center gap-3 border border-red-500/20 bg-red-500/5 px-5 py-4 text-sm text-red-400 mb-8">
-            <FiAlertCircle size={16} className="flex-shrink-0" />
+            <FiAlertCircle size={16} className="shrink-0" />
             {error}
           </div>
         )}
 
         {/* Order Result Panel */}
         {orderData && (
-          <div className="flex flex-col gap-0 border border-white/10 bg-white/[0.02]">
-
-            {/* Order Summary Header */}
-            <div className="px-6 py-5 border-b border-white/10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-              <div>
-                <p className="text-[10px] uppercase tracking-widest text-neutral-500 mb-1 font-semibold">
-                  Order ID
-                </p>
-                <p className="text-sm font-bold text-white tracking-wider">
-                  {orderData.id}
-                </p>
-              </div>
-              <div className="sm:text-right">
-                <p className="text-[10px] uppercase tracking-widest text-neutral-500 mb-1 font-semibold">
-                  Product
-                </p>
-                <p className="text-sm font-semibold text-yellow-500">
-                  {orderData.product}
-                </p>
-              </div>
-            </div>
+          <div className="flex flex-col gap-0 border border-white/10 bg-white/2">
 
             <div className="px-6 py-5 border-b border-white/10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
               <div>
@@ -196,23 +175,21 @@ const TrackOrderPage = () => {
                     {/* Icon + connector line */}
                     <div className="flex flex-col items-center">
                       <div
-                        className={`flex h-9 w-9 flex-shrink-0 items-center justify-center border transition-colors duration-300 ${
-                          isCurrent
+                        className={`flex h-9 w-9 shrink-0 items-center justify-center border transition-colors duration-300 ${isCurrent
                             ? "border-yellow-500 bg-yellow-500/10 text-yellow-500"
                             : isCompleted
-                            ? "border-emerald-500/50 bg-emerald-500/10 text-emerald-400"
-                            : "border-white/10 bg-white/5 text-white/20"
-                        }`}
+                              ? "border-emerald-500/50 bg-emerald-500/10 text-emerald-400"
+                              : "border-white/10 bg-white/5 text-white/20"
+                          }`}
                       >
                         <Icon size={15} />
                       </div>
                       {!isLast && (
                         <div
-                          className={`w-[1px] flex-1 my-1 min-h-[24px] transition-colors duration-300 ${
-                            isCompleted && index < orderData.currentStep
+                          className={`w-px flex-1 my-1 min-h-6 transition-colors duration-300 ${isCompleted && index < orderData.currentStep
                               ? "bg-emerald-500/30"
                               : "bg-white/10"
-                          }`}
+                            }`}
                         />
                       )}
                     </div>
@@ -220,13 +197,12 @@ const TrackOrderPage = () => {
                     {/* Text content */}
                     <div className={`pb-6 ${isLast ? "pb-0" : ""}`}>
                       <p
-                        className={`text-sm font-semibold tracking-wide leading-tight ${
-                          isCurrent
+                        className={`text-sm font-semibold tracking-wide leading-tight ${isCurrent
                             ? "text-yellow-500"
                             : isCompleted
-                            ? "text-white"
-                            : "text-white/25"
-                        }`}
+                              ? "text-white"
+                              : "text-white/25"
+                          }`}
                       >
                         {step.label}
                         {isCurrent && (
@@ -236,9 +212,8 @@ const TrackOrderPage = () => {
                         )}
                       </p>
                       <p
-                        className={`text-xs mt-0.5 ${
-                          isCompleted ? "text-neutral-400" : "text-white/20"
-                        }`}
+                        className={`text-xs mt-0.5 ${isCompleted ? "text-neutral-400" : "text-white/20"
+                          }`}
                       >
                         {step.description}
                       </p>
@@ -254,12 +229,6 @@ const TrackOrderPage = () => {
             </div>
           </div>
         )}
-
-        {/* Branding Footer */}
-        <p className="mt-10 text-center text-[11px] uppercase tracking-widest text-neutral-600">
-          AUREX<span className="text-yellow-500">.</span> — Order Tracking
-        </p>
-
       </div>
     </section>
   );

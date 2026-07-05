@@ -8,12 +8,14 @@ import Testimonials from "../components/front/Testimonials";
 import Gallery from "../components/front/Gallery";
 import Craftsmanship from "../components/front/Craftmanship";
 import Sidebar from "../components/front/CheckoutSidebar";
+// import OrderForm from "../components/front/OrdersForm";
 // import OrderForm from "../components/front/Order";
 
 const LandingPage = () => {
     return (
         <div>
             <Hero />
+            {/* <OrderForm /> */}
             <CounterSection />
             <Features />
             <Gallery />
@@ -21,7 +23,7 @@ const LandingPage = () => {
             <FaqSection />
             <Craftsmanship />
             <Testimonials />
-            <Sidebar/>
+            <Sidebar />
             {/* <OrderForm/>
             <CtaSection/> */}
         </div>
