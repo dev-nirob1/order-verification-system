@@ -10,7 +10,7 @@ export default function FrontLayout({ children }) {
                 <Navbar />
                 {children}
                 {/* <Sidebar /> */}
-                {/* <Footer /> */}
+                <Footer />
             </div>
         </SidebarProvider>
     );

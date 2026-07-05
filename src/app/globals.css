@@ -4,7 +4,8 @@
 
 :root {
   --background: #0B0B0B;
-  --foreground: #F5F5F5;
+  --foreground: #050505;
+  --white: #F5F5F5;
   --font-heading: 'Poppins', sans-serif;
   --font-body: 'Inter', sans-serif;
   --font-numbers: 'Space Grotesk', sans-serif;
