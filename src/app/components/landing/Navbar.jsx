@@ -1,10 +1,12 @@
 'use client'
 import { useEffect, useState } from "react";
 import { HiOutlineMenuAlt3, HiX } from "react-icons/hi";
+import { useSidebar } from "../../context/SidebarContext";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { openSidebar } = useSidebar();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -69,12 +71,12 @@ const Navbar = () => {
 
         {/* Right Side */}
         <div className="flex items-center gap-5">
-          <a
-            href="#buy"
-            className="hidden border border-yellow-500 px-5 py-2 text-sm font-medium uppercase tracking-wide text-yellow-500 transition-all duration-300 hover:bg-yellow-500 hover:text-black lg:block"
+          <button
+            onClick={openSidebar}
+            className="hidden border border-yellow-500 px-5 py-2 text-sm font-medium uppercase tracking-wide text-yellow-500 transition-all duration-300 hover:bg-yellow-500 hover:text-black lg:block cursor-pointer"
           >
             Buy Now
-          </a>
+          </button>
 
           {/* Mobile Menu Button */}
           <button
@@ -105,13 +107,15 @@ const Navbar = () => {
             </a>
           ))}
 
-          <a
-            href="#buy"
-            onClick={() => setMenuOpen(false)}
-            className="mt-6 border border-yellow-500 px-8 py-3 text-sm font-medium uppercase tracking-wider text-yellow-500 transition hover:bg-yellow-500 hover:text-black"
+          <button
+            onClick={() => {
+              setMenuOpen(false);
+              openSidebar();
+            }}
+            className="mt-6 border border-yellow-500 px-8 py-3 text-sm font-medium uppercase tracking-wider text-yellow-500 transition hover:bg-yellow-500 hover:text-black cursor-pointer"
           >
             Buy Now
-          </a>
+          </button>
         </nav>
       </div>
     </header>
