@@ -1,54 +1,51 @@
 import Image from "next/image";
 import { FaCircle } from "react-icons/fa";
+import SectionHeader from "../common/SectionHeader";
 
 const bullets = [
   {
     title: "Tested in 5 Positions",
-    description:
-      "Calibrated for gravity offsets in everyday active positions.",
+    description: "Calibrated for gravity offsets in everyday active positions.",
   },
   {
     title: "Double-Barrel Power",
-    description:
-      "Ensuring constant torque and regular energy distribution.",
+    description: "Ensuring constant torque and regular energy distribution.",
+  },
+  {
+    title: "Shock-Resistant",
+    description: "Designed to withstand the rigors of daily wear and active lifestyles.",
   },
 ];
 
 const Craftsmanship = () => {
   return (
-    <section className="bg-[#0b0b0b] py-24">
-      <div className="mx-auto grid max-w-7xl items-center gap-16 px-6 lg:grid-cols-2 lg:px-10">
+    <section className="bg-(--foreground) py-16">
+      <div className="mx-auto grid max-w-7xl gap-16 md:grid-cols-2 px-6 lg:px-0">
         {/* Image */}
-        <div className="group overflow-hidden border border-white/10">
-          <div className="h-[350px] overflow-hidden lg:h-[500px]">
-            <Image
-              src="/watch_details.png"
-              alt="Swiss watch craftsmanship"
-              width={800}
-              height={1000}
-              className="h-full w-full object-cover transition-transform duration-1000 group-hover:scale-110"
-            />
-          </div>
+        <div className="max-h-auto">
+          <Image
+            src="/watch_details.png"
+            alt="Swiss watch craftsmanship"
+            width={600}
+            height={600}
+            className="h-full w-full object-cover"
+          />
         </div>
 
         {/* Content */}
         <div>
-          <span className="text-sm uppercase tracking-[4px] text-yellow-500">
-            Handcrafted Legacy
-          </span>
-
-          <h2 className="mt-4 text-4xl font-bold text-white lg:text-5xl">
-            Caliber of the Elite
-          </h2>
-
+          <SectionHeader
+            title="Caliber of the Elite"
+            subtitle="Precision Engineering"
+          />
           <p className="mt-6 text-lg leading-8 text-gray-400">
             Every Aurex Chronograph is individually assembled by master
-            watchmakers in Geneva. Each timepiece undergoes more than 240
-            hours of meticulous calibration, shock-resistance tuning, and
-            waterproof testing before leaving the workshop.
+            watchmakers in Geneva. Each timepiece undergoes more than 240 hours
+            of meticulous calibration, shock-resistance tuning, and waterproof
+            testing before leaving the workshop.
           </p>
 
-          <div className="mt-10 space-y-8">
+          <div className="mt-6 space-y-8">
             {bullets.map((item) => (
               <div key={item.title} className="flex gap-5">
                 <FaCircle
@@ -57,9 +54,9 @@ const Craftsmanship = () => {
                 />
 
                 <div>
-                  <h4 className="text-lg font-semibold text-white">
+                  <h5 className="text-lg font-semibold text-white">
                     {item.title}
-                  </h4>
+                  </h5>
 
                   <p className="mt-2 leading-7 text-gray-400">
                     {item.description}

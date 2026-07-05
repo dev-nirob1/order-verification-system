@@ -40,7 +40,7 @@ const FaqSection = () => {
 
   return (
     <section id="faq" className="py-16">
-      <div className="mx-auto grid max-w-7xl gap-16 px-6 grid-cols-2 lg:px-0">
+      <div className="mx-auto grid max-w-7xl gap-16 px-6 lg:grid-cols-2 lg:px-0">
         {/* Left Side */}
         <div className="lg:sticky lg:top-28">
           <SectionHeader
