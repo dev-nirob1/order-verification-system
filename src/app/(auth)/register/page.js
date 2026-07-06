@@ -102,7 +102,7 @@ const Signup = () => {
                 value={form.phone}
                 onChange={handleChange}
                 placeholder="01XXXXXXXXX"
-                className={`w-full rounded-md border bg-white/5 py-3 pl-11 pr-4 text-sm text-white outline-none transition-colors placeholder:text-white/25 focus:border-yellow-500 ${
+                className={`w-full border bg-white/5 py-3 pl-11 pr-4 text-sm text-white outline-none transition-colors placeholder:text-white/25 focus:border-yellow-500 ${
                   errors.phone ? "border-red-500/60" : "border-white/15"
                 }`}
               />
