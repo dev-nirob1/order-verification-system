@@ -189,9 +189,9 @@ function VerificationBadge({ status }) {
   const c = verificationConfig[status];
   return (
     <span
-      className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-medium ${c.bg} ${c.text}`}
+      className={`inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-medium ${c.bg} ${c.text}`}
     >
-      <span className={`h-1.5 w-1.5 rounded-full ${c.dot}`} />
+      <span className={`h-1.5 w-1.5 ${c.dot}`} />
       {c.label}
     </span>
   );
@@ -201,7 +201,7 @@ function DeliveryBadge({ status }) {
   const c = deliveryConfig[status];
   return (
     <span
-      className={`inline-flex items-center rounded-full px-2.5 py-1 text-xs font-medium ${c.bg} ${c.text}`}
+      className={`inline-flex items-center px-2.5 py-1 text-xs font-medium ${c.bg} ${c.text}`}
     >
       {c.label}
     </span>
@@ -233,7 +233,7 @@ function OrderDrawer({ order, onClose, onUpdateDeliveryStatus, onDecision }) {
           </div>
           <button
             onClick={onClose}
-            className="rounded-md p-1.5 text-[#F5F5F5]/40 hover:bg-white/5 hover:text-[#F5F5F5]"
+            className="p-1.5 text-[#F5F5F5]/40 hover:bg-white/5 hover:text-[#F5F5F5]"
             aria-label="Close"
           >
             ✕
@@ -246,7 +246,7 @@ function OrderDrawer({ order, onClose, onUpdateDeliveryStatus, onDecision }) {
             <h3 className="text-xs font-semibold uppercase tracking-wide text-[#F5F5F5]/40 mb-2">
               Customer Information
             </h3>
-            <div className="rounded-lg border border-white/10 p-3 text-sm space-y-1">
+            <div className="border border-white/10 p-3 text-sm space-y-1">
               <p className="font-medium text-[#F5F5F5]">{order.customer}</p>
               <p className="text-[#F5F5F5]/70">{order.phone}</p>
               <p className="text-[#F5F5F5]/40">{order.address}</p>
@@ -259,19 +259,19 @@ function OrderDrawer({ order, onClose, onUpdateDeliveryStatus, onDecision }) {
               Courier History
             </h3>
             <div className="grid grid-cols-3 gap-2">
-              <div className="rounded-lg bg-emerald-500/10 px-3 py-2 text-center">
+              <div className="bg-emerald-500/10 px-3 py-2 text-center">
                 <p className="text-lg font-semibold text-emerald-400">
                   {order.courierHistory.delivered}
                 </p>
                 <p className="text-[11px] text-emerald-400/70">Delivered</p>
               </div>
-              <div className="rounded-lg bg-rose-500/10 px-3 py-2 text-center">
+              <div className="bg-rose-500/10 px-3 py-2 text-center">
                 <p className="text-lg font-semibold text-rose-400">
                   {order.courierHistory.cancelled}
                 </p>
                 <p className="text-[11px] text-rose-400/70">Cancelled</p>
               </div>
-              <div className="rounded-lg bg-yellow-500/10 px-3 py-2 text-center">
+              <div className="bg-yellow-500/10 px-3 py-2 text-center">
                 <p className="text-lg font-semibold text-yellow-400">
                   {order.courierHistory.returned}
                 </p>
@@ -286,7 +286,7 @@ function OrderDrawer({ order, onClose, onUpdateDeliveryStatus, onDecision }) {
               Recommendation
             </h3>
             <div
-              className={`rounded-lg border px-3 py-2.5 ${recommendation.bg} ${recommendation.border}`}
+              className={`border px-3 py-2.5 ${recommendation.bg} ${recommendation.border}`}
             >
               <p className={`text-sm font-semibold ${recommendation.text}`}>
                 {recommendation.label}
@@ -308,7 +308,7 @@ function OrderDrawer({ order, onClose, onUpdateDeliveryStatus, onDecision }) {
                 return (
                   <li key={step.value} className="flex items-center gap-3">
                     <span
-                      className={`flex h-5 w-5 flex-none items-center justify-center rounded-full text-[10px] ${
+                      className={`flex h-5 w-5 flex-none items-center justify-center text-[10px] ${
                         done
                           ? "bg-yellow-500 text-black"
                           : "bg-white/10 text-[#F5F5F5]/30"
@@ -335,7 +335,7 @@ function OrderDrawer({ order, onClose, onUpdateDeliveryStatus, onDecision }) {
             <select
               value={draftDelivery}
               onChange={(e) => setDraftDelivery(e.target.value)}
-              className="w-full rounded-lg border border-white/15 bg-white/5 px-3 py-2 text-sm text-[#F5F5F5] outline-none focus:ring-2 focus:ring-yellow-500/40"
+              className="w-full border border-white/15 bg-white/5 px-3 py-2 text-sm text-[#F5F5F5] outline-none focus:ring-2 focus:ring-yellow-500/40"
             >
               {deliverySteps.map((step) => (
                 <option
@@ -353,20 +353,20 @@ function OrderDrawer({ order, onClose, onUpdateDeliveryStatus, onDecision }) {
         <div className="border-t border-white/10 px-5 py-4 space-y-2">
           <button
             onClick={handleSave}
-            className="w-full rounded-lg bg-yellow-500 py-2 text-sm font-semibold text-black hover:bg-yellow-400"
+            className="w-full bg-yellow-500 py-2 text-sm font-semibold text-black hover:bg-yellow-400"
           >
             Save
           </button>
           <div className="flex gap-2">
             <button
               onClick={() => onDecision(order.id, "approved")}
-              className="flex-1 rounded-lg border border-emerald-500/30 bg-emerald-500/10 py-2 text-sm font-medium text-emerald-400 hover:bg-emerald-500/20"
+              className="flex-1 border border-emerald-500/30 bg-emerald-500/10 py-2 text-sm font-medium text-emerald-400 hover:bg-emerald-500/20"
             >
               Approve
             </button>
             <button
               onClick={() => onDecision(order.id, "rejected")}
-              className="flex-1 rounded-lg border border-rose-500/30 bg-rose-500/10 py-2 text-sm font-medium text-rose-400 hover:bg-rose-500/20"
+              className="flex-1 border border-rose-500/30 bg-rose-500/10 py-2 text-sm font-medium text-rose-400 hover:bg-rose-500/20"
             >
               Reject
             </button>
@@ -446,7 +446,7 @@ export default function OrdersPage() {
         </div>
 
         {/* Tabs */}
-        <div className="mb-4 flex gap-1 border-b border-white/10">
+        <div className="mb-4 flex flex-wrap gap-1 border-b border-white/10">
           {tabs.map((tab) => {
             const isActive = activeTab === tab.value;
             return (
@@ -461,14 +461,14 @@ export default function OrdersPage() {
               >
                 {tab.label}
                 {isActive && (
-                  <span className="absolute inset-x-0 -bottom-px h-0.5 rounded-full bg-yellow-500" />
+                  <span className="absolute inset-x-0 -bottom-px h-0.5 bg-yellow-500" />
                 )}
               </button>
             );
           })}
         </div>
 
-        <div className="overflow-hidden rounded-xl border border-white/10 bg-[#111111]">
+        <div className="overflow-hidden border border-white/10 bg-[#111111]">
           <div className="overflow-x-auto">
             <table className="w-full min-w-[820px] text-left text-sm">
               <thead>
@@ -503,7 +503,7 @@ export default function OrdersPage() {
                         onChange={(e) =>
                           updateOrderStatus(order.id, e.target.value)
                         }
-                        className={`rounded-md border px-2 py-1.5 text-xs font-medium outline-none focus:ring-2 ${orderStatusSelectStyle[order.orderStatus]}`}
+                        className={`border px-2 py-1.5 text-xs font-medium outline-none focus:ring-2 ${orderStatusSelectStyle[order.orderStatus]}`}
                       >
                         {orderStatusOptions.map((opt) => (
                           <option
@@ -522,7 +522,7 @@ export default function OrdersPage() {
                     <td className="px-4 py-3 text-right">
                       <button
                         onClick={() => setSelectedOrderId(order.id)}
-                        className="rounded-md border border-white/15 px-3 py-1.5 text-xs font-medium text-[#F5F5F5]/80 transition-colors hover:bg-white/10"
+                        className="border border-white/15 px-3 py-1.5 text-xs font-medium text-[#F5F5F5]/80 transition-colors hover:bg-white/10"
                       >
                         View
                       </button>
