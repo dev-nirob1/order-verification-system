@@ -71,7 +71,7 @@ export default function Dashboard() {
           return (
             <div
               key={item.title}
-              className="rounded-xl border border-white/10 bg-[#111] p-6"
+              className="border border-white/10 bg-[#111] p-6"
             >
               <div className="flex items-center justify-between">
                 <div>
@@ -88,7 +88,7 @@ export default function Dashboard() {
                   </p>
                 </div>
 
-                <div className="rounded-lg bg-yellow-500/10 p-3 text-yellow-500">
+                <div className="bg-yellow-500/10 p-3 text-yellow-500">
                   <Icon size={22} />
                 </div>
               </div>
@@ -98,7 +98,7 @@ export default function Dashboard() {
       </div>
 
       {/* Recent Orders */}
-      <div className="rounded-xl border border-white/10 bg-[#111] p-6">
+      <div className="border border-white/10 bg-[#111] p-6">
         <div className="mb-5 flex items-center justify-between">
           <h3 className="font-semibold text-white">
             Recent Orders

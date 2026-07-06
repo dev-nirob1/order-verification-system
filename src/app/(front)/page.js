@@ -1,5 +1,4 @@
 import CounterSection from "../components/front/CounterSection";
-import CtaSection from "../components/front/HeroSection";
 import FaqSection from "../components/front/FaqSection";
 import Features from "../components/front/Features";
 import Hero from "../components/front/HeroSection";
@@ -8,8 +7,7 @@ import Testimonials from "../components/front/Testimonials";
 import Gallery from "../components/front/Gallery";
 import Craftsmanship from "../components/front/Craftmanship";
 import Sidebar from "../components/front/CheckoutSidebar";
-// import OrderForm from "../components/front/OrdersForm";
-// import OrderForm from "../components/front/Order";
+import CtaSection from "../components/front/CtaSection";
 
 const LandingPage = () => {
     return (
@@ -23,6 +21,7 @@ const LandingPage = () => {
             <FaqSection />
             <Craftsmanship />
             <Testimonials />
+            <CtaSection/>
             <Sidebar />
             {/* <OrderForm/>
             <CtaSection/> */}
