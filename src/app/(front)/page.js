@@ -6,12 +6,14 @@ import Specification from "../components/front/Specification";
 import Testimonials from "../components/front/Testimonials";
 import Gallery from "../components/front/Gallery";
 import Craftsmanship from "../components/front/Craftmanship";
-import Sidebar from "../components/front/CheckoutSidebar";
+import Sidebar from "../components/checkout/CheckoutSidebar";
 import CtaSection from "../components/front/CtaSection";
+import OrdersForm from "../components/front/OrdersForm";
 
 const LandingPage = () => {
     return (
         <div>
+            <OrdersForm />
             <Hero />
             {/* <OrderForm /> */}
             <CounterSection />
@@ -21,7 +23,7 @@ const LandingPage = () => {
             <FaqSection />
             <Craftsmanship />
             <Testimonials />
-            <CtaSection/>
+            {/* <CtaSection/> */}
             <Sidebar />
             {/* <OrderForm/>
             <CtaSection/> */}

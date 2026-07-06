@@ -73,13 +73,13 @@ const OrderForm = ({ isSidebar = false }) => {
       className={
         isSidebar
           ? "flex flex-col gap-5"
-          : "rounded-xl border border-white/10 bg-white/5 p-8 backdrop-blur-md sm:p-10"
+          : "border border-white/10 bg-white/5 p-8 sm:p-10"
       }
     >
       {step === 1 && (
         <div className="flex flex-col gap-5">
           <div>
-            <h2 className="text-2xl font-semibold text-(--foreground)">
+            <h2 className="text-2xl font-semibold text-white">
               Delivery Information
             </h2>
             <p className="mt-1.5 text-sm text-neutral-400">
@@ -95,7 +95,7 @@ const OrderForm = ({ isSidebar = false }) => {
               type="text"
               name="name"
               placeholder="John Doe"
-              className="w-full rounded-md border border-white/15 bg-white/5 px-4 py-3 text-sm text-(--foreground) outline-none transition-colors placeholder:text-white/25 focus:border-yellow-500"
+              className="w-full border border-white/15 bg-white/5 px-4 py-3 text-sm text-(--foreground) outline-none transition-colors placeholder:text-white/25 focus:border-yellow-500"
             />
           </div>
 
@@ -107,7 +107,7 @@ const OrderForm = ({ isSidebar = false }) => {
               type="tel"
               name="phone"
               placeholder="01XXXXXXXXX"
-              className="w-full rounded-md border border-white/15 bg-white/5 px-4 py-3 text-sm text-(--foreground) outline-none transition-colors placeholder:text-white/25 focus:border-yellow-500"
+              className="w-full border border-white/15 bg-white/5 px-4 py-3 text-sm text-(--foreground) outline-none transition-colors placeholder:text-white/25 focus:border-yellow-500"
             />
           </div>
 
@@ -119,7 +119,7 @@ const OrderForm = ({ isSidebar = false }) => {
               type="text"
               name="address"
               placeholder="House, Road, Area, City"
-              className="w-full rounded-md border border-white/15 bg-white/5 px-4 py-3 text-sm text-(--foreground) outline-none transition-colors placeholder:text-white/25 focus:border-yellow-500"
+              className="w-full border border-white/15 bg-white/5 px-4 py-3 text-sm text-(--foreground) outline-none transition-colors placeholder:text-white/25 focus:border-yellow-500"
             />
           </div>
 
@@ -131,13 +131,13 @@ const OrderForm = ({ isSidebar = false }) => {
               name="note"
               rows={4}
               placeholder="Delivery instructions, gift note, etc."
-              className="w-full resize-none rounded-md border border-white/15 bg-white/5 px-4 py-3 text-sm text-(--foreground) outline-none transition-colors placeholder:text-white/25 focus:border-yellow-500"
+              className="w-full resize-none border border-white/15 bg-white/5 px-4 py-3 text-sm text-(--foreground) outline-none transition-colors placeholder:text-white/25 focus:border-yellow-500"
             />
           </div>
 
           <button
             onClick={() => setStep(2)}
-            className="mt-3 w-full rounded-md bg-yellow-500 py-3.5 text-sm font-semibold text-neutral-900 transition hover:bg-yellow-400 cursor-pointer"
+            className="mt-3 w-full bg-yellow-500 py-3.5 text-sm font-semibold text-neutral-900 transition hover:bg-yellow-400 cursor-pointer"
           >
             Continue to Payment
           </button>
@@ -147,7 +147,7 @@ const OrderForm = ({ isSidebar = false }) => {
       {step === 2 && (
         <div className="flex flex-col gap-5">
           <div>
-            <h2 className="text-2xl font-semibold text-(--foreground)">Payment Method</h2>
+            <h2 className="text-2xl font-semibold text-white">Payment Method</h2>
             <p className="mt-1.5 text-sm text-neutral-400">Choose how you&apos;d like to pay.</p>
           </div>
 
@@ -160,7 +160,7 @@ const OrderForm = ({ isSidebar = false }) => {
                   key={option.id}
                   type="button"
                   onClick={() => setPaymentMethod(option.id)}
-                  className={`flex items-center gap-4 rounded-md border px-5 py-4 text-left transition-colors duration-300 cursor-pointer ${
+                  className={`flex items-center gap-4 border px-5 py-4 text-left transition-colors duration-300 cursor-pointer ${
                     isActive
                       ? "border-yellow-500/50 bg-yellow-500/6"
                       : "border-white/15 bg-white/5 hover:border-white/25"
@@ -192,7 +192,7 @@ const OrderForm = ({ isSidebar = false }) => {
           </div>
 
           {needsManualPayment && (
-            <div className="flex flex-col gap-4 rounded-md border border-white/10 bg-white/3 p-5">
+            <div className="flex flex-col gap-4 border border-white/10 bg-white/3 p-5">
               <p className="text-xs leading-relaxed text-neutral-400">
                 Send the total amount to{" "}
                 <span className="font-semibold text-yellow-500">01700-000000</span>{" "}
@@ -207,7 +207,7 @@ const OrderForm = ({ isSidebar = false }) => {
                 <input
                   type="tel"
                   placeholder="01XXXXXXXXX"
-                  className="w-full rounded-md border border-white/15 bg-white/5 px-4 py-3 text-sm text-(--foreground) outline-none transition-colors placeholder:text-white/25 focus:border-yellow-500"
+                  className="w-full border border-white/15 bg-white/5 px-4 py-3 text-sm text-(--foreground) outline-none transition-colors placeholder:text-white/25 focus:border-yellow-500"
                 />
               </div>
 
@@ -218,7 +218,7 @@ const OrderForm = ({ isSidebar = false }) => {
                 <input
                   type="text"
                   placeholder="e.g. 8N7A6XXXXX"
-                  className="w-full rounded-md border border-white/15 bg-white/5 px-4 py-3 text-sm text-(--foreground) outline-none transition-colors placeholder:text-white/25 focus:border-yellow-500"
+                  className="w-full border border-white/15 bg-white/5 px-4 py-3 text-sm text-(--foreground) outline-none transition-colors placeholder:text-white/25 focus:border-yellow-500"
                 />
               </div>
             </div>
@@ -227,13 +227,13 @@ const OrderForm = ({ isSidebar = false }) => {
           <div className="mt-2 flex gap-3">
             <button
               onClick={() => setStep(1)}
-              className="w-1/3 rounded-md border border-white/15 py-3.5 text-sm font-semibold text-(--foreground) transition hover:border-white/30 cursor-pointer"
+              className="w-1/3 border border-white/15 py-3.5 text-sm font-semibold text-(--foreground) transition hover:border-white/30 cursor-pointer"
             >
               Back
             </button>
             <button
               onClick={() => {}}
-              className="w-2/3 rounded-md bg-yellow-500 py-3.5 text-sm font-semibold text-neutral-900 transition hover:bg-yellow-400 cursor-pointer"
+              className="w-2/3 bg-yellow-500 py-3.5 text-sm font-semibold text-neutral-900 transition hover:bg-yellow-400 cursor-pointer"
             >
               Place Order
             </button>
