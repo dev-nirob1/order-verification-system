@@ -6,21 +6,21 @@ import { useCheckout } from "@/app/hooks/useCheckout";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const {openCheckout} = useCheckout()
+  const { openCheckout } = useCheckout();
 
   const navLinks = [
-    { name: "Home", href: "#hero" },
+    { name: "Home", href: "/" },
     { name: "Features", href: "#features" },
-    { name: "Specs", href: "#specifications-detail" },
-    { name: "Reviews", href: "#reviews" },
-    { name: "FAQ", href: "#faq" },
+    { name: "Track Order", href: "/track-order" },
+    { name: "Dashboard", href: "/dashboard" },
+    { name: "Login", href: "/login" },
   ];
 
   return (
     <header className="fixed top-0 left-0 z-50 w-full border-b border-white/5 backdrop-blur-xl transition-all duration-500">
       <div className="relative mx-auto flex h-full max-w-7xl items-center justify-between px-6 py-5 lg:px-0">
         {/* Logo */}
-        <Link href="#" className="text-2xl font-bold tracking-[4px] text-white">
+        <Link href="/" className="text-2xl font-bold tracking-[4px] text-white">
           AUREX<span className="text-yellow-500">.</span>
         </Link>
 
@@ -43,7 +43,10 @@ const Navbar = () => {
         </nav>
 
         <div>
-          <button onClick={openCheckout} className="border border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-gray-900 px-5 py-2">
+          <button
+            onClick={openCheckout}
+            className="border border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-gray-900 px-5 py-2"
+          >
             BUY NOW
           </button>
         </div>

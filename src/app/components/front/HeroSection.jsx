@@ -18,7 +18,7 @@ const Hero = () => {
       {/* dark gradient so text stays readable over the photo */}
       <div className="absolute inset-0 -z-10 bg-linear-to-r from-neutral-950 via-neutral-950/70 to-neutral-800/5" />
 
-      <div className="mx-auto flex min-h-[calc(100vh-8rem)] max-w-7xl flex-col justify-center px-6 lg:px-0">
+      <div className="mx-auto flex min-h-[calc(100vh-8rem)] max-w-7xl flex-col justify-center lg:pt-12 px-6 lg:px-0">
         <SectionHeader
           title="Claim Your Signature Piece"
           subtitle="Limited Edition Release"

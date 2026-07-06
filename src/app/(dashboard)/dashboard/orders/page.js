@@ -470,9 +470,9 @@ export default function OrdersPage() {
 
         <div className="overflow-hidden border border-white/10 bg-[#111111]">
           <div className="overflow-x-auto">
-            <table className="w-full min-w-[820px] text-left text-sm">
+            <table className="w-full min-w-205 text-left text-sm">
               <thead>
-                <tr className="border-b border-white/10 bg-white/[0.03] text-xs uppercase tracking-wide text-[#F5F5F5]/40">
+                <tr className="border-b border-white/10 bg-white/3 text-xs uppercase tracking-wide text-[#F5F5F5]/40">
                   <th className="px-4 py-3 font-medium">Order ID</th>
                   <th className="px-4 py-3 font-medium">Customer</th>
                   <th className="px-4 py-3 font-medium">Phone</th>
@@ -484,7 +484,7 @@ export default function OrdersPage() {
               </thead>
               <tbody className="divide-y divide-white/5">
                 {filteredOrders.map((order) => (
-                  <tr key={order.id} className="hover:bg-white/[0.03]">
+                  <tr key={order.id} className="hover:bg-white/3">
                     <td className="px-4 py-3 font-medium text-[#F5F5F5]">
                       {order.id}
                     </td>

@@ -7,6 +7,7 @@ import Testimonials from "../components/front/Testimonials";
 import Gallery from "../components/front/Gallery";
 import Craftsmanship from "../components/front/Craftmanship";
 import Sidebar from "../components/checkout/CheckoutSidebar";
+import CtaSection from "../components/front/CtaSection";
 
 const LandingPage = () => (
     <div>
@@ -18,7 +19,7 @@ const LandingPage = () => (
         <FaqSection />
         <Craftsmanship />
         <Testimonials />
-        {/* <CtaSection /> */}
+        <CtaSection />
         <Sidebar />
     </div>
 );
