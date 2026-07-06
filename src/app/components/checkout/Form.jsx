@@ -1,4 +1,5 @@
 'use client'
+
 const DeliveryInfoStep = ({ setStep }) => (
   <div className="flex flex-col gap-5">
     <div>
