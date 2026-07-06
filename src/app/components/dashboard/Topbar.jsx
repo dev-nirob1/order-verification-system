@@ -1,13 +1,17 @@
 "use client";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
-import { FiUser, FiBell, FiLogOut, FiX } from "react-icons/fi";
+import { FiUser, FiLogOut } from "react-icons/fi";
+import { useSidebar } from "@/app/hooks/useSidebar";
 
 const Topbar = () => {
+  const { openSidebar } = useSidebar();
+  console.log(openSidebar)
+
   return (
     <header className="flex w-full h-16 items-center justify-between border-b border-white/10 bg-[#0B0B0B] px-6">
       <div className="flex items-center gap-4">
         {/* hamburger  */}
-        <button>
+        <button onClick={openSidebar}>
           <HiOutlineMenuAlt3 size={24} className="text-white lg:hidden" />
         </button>
         <h5 className="text-sm font-semibold uppercase tracking-wider text-neutral-300">

@@ -10,9 +10,12 @@ import {
 } from "react-icons/fi";
 import SidebarItem from "./SidebarItem";
 import Link from "next/link";
+import { useSidebar } from "@/app/hooks/useSidebar";
 
-const Sidebar = ({ isOpen, onClose }) => {
-  const pathname = usePathname();
+const Sidebar = () => {
+  const pathname = usePathname();  // for active links
+
+  const {isSidebarOpen, closeSidebar} = useSidebar();
 
   const navItems = [
     { href: "/dashboard", label: "Dashboard", icon: FiGrid },
@@ -24,16 +27,16 @@ const Sidebar = ({ isOpen, onClose }) => {
   return (
     <>
       {/* overlaping  */}
-      {isOpen && (
+      {isSidebarOpen && (
         <div
-          onClick={onClose}
+          onClick={closeSidebar}
           className="fixed inset-0 z-30 bg-black/50 lg:hidden"
         />
       )}
 
       <aside
         className={`fixed top-0 left-0 z-40 h-screen w-64 bg-[#0B0B0B] border-r border-white/10 transition-transform duration-300 ${
-          isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
+          isSidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
         }`}
       >
         {/* Header */}
@@ -46,7 +49,7 @@ const Sidebar = ({ isOpen, onClose }) => {
           </Link>
 
           {/* close button  */}
-          <button onClick={onClose} className="text-white lg:hidden">
+          <button onClick={closeSidebar} className="text-white lg:hidden">
             <FiX size={22} />
           </button>
         </div>

@@ -1,139 +1,118 @@
-'use client';
-import React from "react";
+"use client";
+
 import {
   FiShoppingBag,
-  FiClock,
   FiAlertCircle,
-  FiPackage,
-  FiCheckCircle,
   FiDollarSign,
-  FiArrowUpRight,
-  FiArrowDownRight,
+  FiArrowRight,
 } from "react-icons/fi";
 
 const stats = [
   {
     title: "Total Orders",
     value: "1,280",
-    change: "+12.5%",
-    trend: "up",
-    timeframe: "vs last month",
+    subtitle: "All Orders",
     icon: FiShoppingBag,
   },
   {
-    title: "Today's Orders",
-    value: "42",
-    change: "+8.2%",
-    trend: "up",
-    timeframe: "vs yesterday",
-    icon: FiClock,
-  },
-  {
-    title: "Pending Verification",
+    title: "Pending Review",
     value: "18",
-    change: "-4.3%",
-    trend: "down",
-    timeframe: "vs yesterday",
+    subtitle: "Needs Approval",
     icon: FiAlertCircle,
   },
   {
-    title: "Ready to Ship",
-    value: "25",
-    change: "+15.0%",
-    trend: "up",
-    timeframe: "vs last week",
-    icon: FiPackage,
-  },
-  {
-    title: "Delivered Orders",
-    value: "1,195",
-    change: "+93.4%",
-    trend: "up",
-    timeframe: "all-time rate",
-    icon: FiCheckCircle,
-  },
-  {
-    title: "Total Revenue",
-    value: "$15,240",
-    change: "+18.2%",
-    trend: "up",
-    timeframe: "vs last month",
+    title: "Revenue",
+    value: "৳2,45,000",
+    subtitle: "Total Sales",
     icon: FiDollarSign,
   },
 ];
 
-const Dashboard = () => {
-  // Format current date matching the design
-  const currentDate = new Date().toLocaleDateString("en-US", {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
+const reviewOrders = [
+  {
+    id: "#ORD-1024",
+    customer: "Hasan",
+    phone: "017XXXXXXXX",
+    status: "Trusted",
+  },
+  {
+    id: "#ORD-1025",
+    customer: "Rahim",
+    phone: "018XXXXXXXX",
+    status: "Review",
+  },
+  {
+    id: "#ORD-1026",
+    customer: "Karim",
+    phone: "019XXXXXXXX",
+    status: "High Risk",
+  },
+];
 
+export default function Dashboard() {
   return (
-    <div className="flex flex-col gap-8 rounded-none">
-      {/* Page Header */}
-      <div className="flex flex-col gap-1.5 rounded-none">
-        <h2 className="text-2xl font-bold tracking-wider text-white uppercase">
-          Overview
-        </h2>
-        <p className="text-xs uppercase tracking-widest text-neutral-400 font-semibold">
-          {currentDate}
+    <div className="space-y-8">
+      {/* Header */}
+      <div>
+        <h1 className="text-3xl font-bold text-white">
+          Dashboard
+        </h1>
+
+        <p className="mt-1 text-neutral-400">
+          Welcome back. Here&apos;s today&apos;s overview.
         </p>
       </div>
 
-      {/* Grid Layout for Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 rounded-none">
-        {stats.map((stat, index) => {
-          const Icon = stat.icon;
-          const isUp = stat.trend === "up";
-          const TrendIcon = isUp ? FiArrowUpRight : FiArrowDownRight;
+      {/* Stats */}
+      <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+        {stats.map((item) => {
+          const Icon = item.icon;
 
           return (
             <div
-              key={index}
-              className="flex flex-col justify-between border border-white/10 bg-white/[0.02] p-6 hover:border-yellow-500/30 hover:-translate-y-1 transition-all duration-300 rounded-none group hover:shadow-[0_10px_30px_rgba(234,179,8,0.02)] cursor-pointer"
+              key={item.title}
+              className="rounded-xl border border-white/10 bg-[#111] p-6"
             >
-              {/* Card Top Row */}
-              <div className="flex items-start justify-between rounded-none">
-                <span className="text-xs uppercase tracking-widest text-neutral-400 font-semibold group-hover:text-neutral-300 transition-colors duration-300">
-                  {stat.title}
-                </span>
-                <span className="flex h-10 w-10 items-center justify-center border border-white/10 text-neutral-400 group-hover:border-yellow-500/40 group-hover:text-yellow-500 transition-all duration-300 rounded-none bg-white/5">
-                  <Icon size={18} />
-                </span>
-              </div>
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm text-neutral-400">
+                    {item.title}
+                  </p>
 
-              {/* Card Value */}
-              <div className="mt-4 rounded-none">
-                <h3 className="text-3xl font-bold tracking-tight text-white font-numbers group-hover:text-yellow-500 transition-colors duration-300">
-                  {stat.value}
-                </h3>
-              </div>
+                  <h2 className="mt-2 text-3xl font-bold text-white">
+                    {item.value}
+                  </h2>
 
-              {/* Card Footer Trend Info */}
-              <div className="mt-4 flex items-center gap-2 text-xs rounded-none">
-                <span
-                  className={`flex items-center gap-0.5 font-semibold px-2 py-0.5 rounded-none ${
-                    isUp
-                      ? "bg-emerald-500/10 text-emerald-400"
-                      : "bg-rose-500/10 text-rose-400"
-                  }`}
-                >
-                  <TrendIcon size={12} />
-                  {stat.change}
-                </span>
-                <span className="text-neutral-400 font-medium">
-                  {stat.timeframe}
-                </span>
+                  <p className="mt-1 text-xs text-neutral-500">
+                    {item.subtitle}
+                  </p>
+                </div>
+
+                <div className="rounded-lg bg-yellow-500/10 p-3 text-yellow-500">
+                  <Icon size={22} />
+                </div>
               </div>
             </div>
           );
         })}
       </div>
+
+      {/* Recent Orders */}
+      <div className="rounded-xl border border-white/10 bg-[#111] p-6">
+        <div className="mb-5 flex items-center justify-between">
+          <h3 className="font-semibold text-white">
+            Recent Orders
+          </h3>
+
+          <button className="text-sm text-yellow-500">
+            View All
+          </button>
+        </div>
+
+        <div className="text-neutral-400">
+          Your latest orders will appear here...
+        </div>
+      </div>
     </div>
   );
-};
-
-export default Dashboard;
+}
