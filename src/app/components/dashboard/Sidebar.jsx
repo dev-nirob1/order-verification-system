@@ -23,6 +23,7 @@ const Sidebar = ({ isOpen, onClose }) => {
 
   return (
     <>
+      {/* overlaping  */}
       {isOpen && (
         <div
           onClick={onClose}
@@ -33,15 +34,20 @@ const Sidebar = ({ isOpen, onClose }) => {
       <aside
         className={`fixed top-0 left-0 z-40 h-screen w-64 bg-[#0B0B0B] border-r border-white/10 transition-transform duration-300 ${
           isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
-        }`}>
-          
+        }`}
+      >
         {/* Header */}
         <div className="flex h-16 items-center justify-between border-b border-white/10 px-5">
-          <Link href={"/"} className="text-xl font-bold tracking-[4px] text-white">
+          <Link
+            href={"/"}
+            className="text-xl font-bold tracking-[4px] text-white"
+          >
             AUREX<span className="text-yellow-500">.</span>
           </Link>
+
+          {/* close button  */}
           <button onClick={onClose} className="text-white lg:hidden">
-            <FiX size={22} /> 
+            <FiX size={22} />
           </button>
         </div>
 
