@@ -2,9 +2,9 @@ import { FiCheck } from "react-icons/fi";
 
 const labels = ["Information", "Payment"];
 
-const StepIndicator = ({ step, isSidebar = false }) => (
+const StepIndicator = ({ step }) => (
   <div
-    className={`flex items-center justify-center gap-4 ${isSidebar ? "mb-8" : "mb-12"}`}
+    className="flex items-center justify-center gap-4 mb-8"
   >
     {labels.map((label, i) => {
       const s = i + 1;

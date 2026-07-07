@@ -1,6 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { FiSmartphone, FiTruck } from "react-icons/fi";
+import Form from "./Form";
 
 const paymentOptions = [
   {
@@ -31,12 +32,10 @@ const PaymentStep = ({ paymentMethod, setPaymentMethod, setStep }) => {
   };
 
   return (
-    <div className="flex flex-col gap-5">
+    <div className="flex flex-col gap-4">
+      <Form />
       <div>
-        <h2 className="text-2xl font-semibold text-white">Payment Method</h2>
-        <p className="mt-1.5 text-sm text-neutral-400">
-          Choose how you&apos;d like to pay.
-        </p>
+        <h5 className="text-xl font-semibold text-white">Payment Method</h5>
       </div>
 
       <div className="flex flex-col gap-3">
@@ -49,7 +48,7 @@ const PaymentStep = ({ paymentMethod, setPaymentMethod, setStep }) => {
               key={option.id}
               type="button"
               onClick={() => setPaymentMethod(option.id)}
-              className={`flex items-center gap-4 border px-5 py-4 text-left transition-colors duration-300 cursor-pointer ${
+              className={`flex items-center gap-4 border p-3 text-left transition-colors duration-300 cursor-pointer ${
                 active
                   ? "border-yellow-500/50 bg-yellow-500/6"
                   : "border-white/15 bg-white/5 hover:border-white/25"

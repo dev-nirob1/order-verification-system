@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import StepIndicator from "./StepIndecator";
 import Form from "./Form";
 import PaymentStep from "./PaymentStep";
+import NumberInput from "./NumberInput/NumberInput";
 
 const CheckoutProcess = () => {
   const [step, setStep] = useState(1);
@@ -10,7 +11,7 @@ const CheckoutProcess = () => {
     <section className="w-full min-h-screen px-4">
       {/* Step Header Area */}
       <StepIndicator step={step} />
-     {step===1 && <Form setStep={setStep}/>}
+     {step===1 && <NumberInput setStep={setStep}/>}
      {step === 2 && <PaymentStep paymentMethod={paymentMethod} setPaymentMethod={setPaymentMethod} setStep={setStep}/>}
     </section>
   );
