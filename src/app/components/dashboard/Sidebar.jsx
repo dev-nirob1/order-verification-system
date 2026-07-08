@@ -18,10 +18,10 @@ const Sidebar = () => {
   const {isSidebarOpen, closeSidebar} = useSidebar();
 
   const navItems = [
-    { href: "/dashboard", label: "Dashboard", icon: FiGrid },
-    { href: "/dashboard/orders", label: "Orders", icon: FiShoppingBag },
-    { href: "/dashboard/customers", label: "Customers", icon: FiUsers },
-    { href: "/dashboard/settings", label: "Settings", icon: FiSettings },
+    { href: "/admin", label: "Dashboard", icon: FiGrid },
+    { href: "/admin/orders", label: "Orders", icon: FiShoppingBag },
+    { href: "/admin/customers", label: "Customers", icon: FiUsers },
+    { href: "/admin/settings", label: "Settings", icon: FiSettings },
   ];
 
   return (

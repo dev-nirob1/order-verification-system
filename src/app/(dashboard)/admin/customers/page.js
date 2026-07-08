@@ -1,5 +1,9 @@
 "use client";
 
+import TableContainer from "@/app/components/ui/table/TableContainer";
+import TableData from "@/app/components/ui/table/TableData";
+import TableHeader from "@/app/components/ui/table/TableHeader";
+import TableRow from "@/app/components/ui/table/TableRow";
 import { useState } from "react";
 
 const customers = [
@@ -337,35 +341,39 @@ export default function CustomersPage() {
           />
         </div>
 
-        <div className="overflow-hidden border border-white/10 bg-[#111111]">
-          {/* Header row — hidden on mobile, shown as a real table header from md up */}
-          <div
-            className={`hidden border-b border-white/10 bg-white/3 px-4 py-3 text-xs font-medium uppercase tracking-wide text-[#F5F5F5]/40 md:grid ${gridCols}`}
-          >
+        <TableContainer>
+          <TableHeader>
             <span>Customer ID</span>
             <span>Name</span>
             <span>Phone</span>
             <span>Success Rate</span>
             <span>Orders</span>
             <span className="text-right">Action</span>
-          </div>
+          </TableHeader>
+          {customers.map((customer, i) => <TableRow key={i}>
 
-          <div>
-            {filteredCustomers.map((customer) => (
-              <CustomerRow
-                key={customer.id}
-                customer={customer}
-                onView={setSelectedCustomerId}
-              />
-            ))}
-
-            {filteredCustomers.length === 0 && (
-              <div className="px-4 py-10 text-center text-sm text-[#F5F5F5]/30">
-                No customers match your search.
-              </div>
-            )}
-          </div>
-        </div>
+            <TableData label="Customer ID">
+              {customer.id}
+            </TableData>
+            <TableData label="Name">
+              {customer.name}
+            </TableData>
+            <TableData label="Phone">
+              {customer.phone}
+            </TableData>
+            <TableData label="Success Rate">
+              <span className="text-emerald-500">61%</span>
+            </TableData>
+            <TableData label="Orders">
+              {customer.totalOrders}
+            </TableData>
+            <TableData label="Action" align="right">
+              <button className="border border-white/15 px-3 py-1.5 text-xs font-medium text-[#F5F5F5]/80 transition-colors hover:bg-white/10">View</button>
+            </TableData>
+          </TableRow>
+          )
+          }
+        </TableContainer>
       </div>
 
       {selectedCustomer && (
