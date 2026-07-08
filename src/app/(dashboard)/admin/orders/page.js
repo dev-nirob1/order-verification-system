@@ -68,7 +68,7 @@ const tabs = ["All", "Pending", "Approved", "Rejected", "Cancelled"];
 const deliverySteps = ["Order Received", "Packed", "Shipped", "Out for Delivery", "Delivered"];
 const gridCols = "md:grid-cols-[1fr_1.3fr_1.2fr_1.2fr_1.2fr_0.8fr]";
 
-export default function OrdersPage() {
+const OrdersPage = ()=> {
   const { openDrawer } = useDrawer();
 
   return (
@@ -172,3 +172,5 @@ export default function OrdersPage() {
     </div>
   );
 }
+
+export default OrdersPage;
