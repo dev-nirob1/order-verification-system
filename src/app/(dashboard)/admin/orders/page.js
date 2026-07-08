@@ -4,17 +4,17 @@ import TableContainer from "@/app/components/ui/table/TableContainer";
 import TableData from "@/app/components/ui/table/TableData";
 import TableHeader from "@/app/components/ui/table/TableHeader";
 import TableRow from "@/app/components/ui/table/TableRow";
-import { useEffect, useState } from "react";
+import useDrawer from "@/app/hooks/useDrawer";
 
-const initialOrders = [
+const orders = [
   {
     id: "ORD-101",
     customer: "Hasan Mahmud",
     phone: "01712-345678",
     address: "House 12, Road 4, Dhanmondi, Dhaka",
-    verification: "trusted",
-    orderStatus: "approved",
-    deliveryStatus: "shipped",
+    verification: "Trusted",
+    orderStatus: "Approved",
+    deliveryStatus: "Shipped",
     courierHistory: { delivered: 8, cancelled: 2, returned: 1 },
     notes: "",
   },
@@ -23,9 +23,9 @@ const initialOrders = [
     customer: "Farzana Akter",
     phone: "01898-765432",
     address: "Flat 3B, Green Road, Dhaka",
-    verification: "needs_verification",
-    orderStatus: "pending",
-    deliveryStatus: "order_received",
+    verification: "Needs Verification",
+    orderStatus: "Pending",
+    deliveryStatus: "Order Received",
     courierHistory: { delivered: 3, cancelled: 3, returned: 2 },
     notes: "",
   },
@@ -34,9 +34,9 @@ const initialOrders = [
     customer: "Rakibul Islam",
     phone: "01611-223344",
     address: "Village: Kashimpur, Gazipur",
-    verification: "review_required",
-    orderStatus: "pending",
-    deliveryStatus: "order_received",
+    verification: "Review Required",
+    orderStatus: "Pending",
+    deliveryStatus: "Order Received",
     courierHistory: { delivered: 1, cancelled: 5, returned: 3 },
     notes: "",
   },
@@ -45,9 +45,9 @@ const initialOrders = [
     customer: "Nusrat Jahan",
     phone: "01922-556677",
     address: "House 45, Sector 7, Uttara, Dhaka",
-    verification: "trusted",
-    orderStatus: "approved",
-    deliveryStatus: "delivered",
+    verification: "Trusted",
+    orderStatus: "Approved",
+    deliveryStatus: "Delivered",
     courierHistory: { delivered: 12, cancelled: 0, returned: 0 },
     notes: "Regular customer, always accepts delivery.",
   },
@@ -56,387 +56,20 @@ const initialOrders = [
     customer: "Tanvir Ahmed",
     phone: "01555-889900",
     address: "Holding 9, Pahartali, Chattogram",
-    verification: "needs_verification",
-    orderStatus: "rejected",
-    deliveryStatus: "order_received",
+    verification: "Needs Verification",
+    orderStatus: "Rejected",
+    deliveryStatus: "Order Received",
     courierHistory: { delivered: 4, cancelled: 4, returned: 1 },
     notes: "",
   },
-  {
-    id: "ORD-106",
-    customer: "Mim Sultana",
-    phone: "01777-112233",
-    address: "House 2, Road 9, Bashundhara, Dhaka",
-    verification: "trusted",
-    orderStatus: "cancelled",
-    deliveryStatus: "order_received",
-    courierHistory: { delivered: 6, cancelled: 1, returned: 0 },
-    notes: "",
-  },
-];
-const gridCols =
-  "md:grid-cols-[1fr_1.3fr_1.2fr_1.2fr_1.2fr_1fr_0.8fr]";
-const tabs = [
-  { value: "all", label: "All" },
-  { value: "pending", label: "Pending" },
-  { value: "approved", label: "Approved" },
-  { value: "rejected", label: "Rejected" },
-  { value: "cancelled", label: "Cancelled" },
 ];
 
-const verificationConfig = {
-  trusted: {
-    label: "Trusted",
-    dot: "bg-emerald-400",
-    text: "text-emerald-400",
-    bg: "bg-emerald-500/10",
-  },
-  needs_verification: {
-    label: "Needs Verification",
-    dot: "bg-yellow-500",
-    text: "text-yellow-400",
-    bg: "bg-yellow-500/10",
-  },
-  review_required: {
-    label: "Review Required",
-    dot: "bg-rose-400",
-    text: "text-rose-400",
-    bg: "bg-rose-500/10",
-  },
-};
-
-const deliveryConfig = {
-  order_received: {
-    label: "Order Received",
-    text: "text-[#F5F5F5]/70",
-    bg: "bg-white/5",
-  },
-  packed: { label: "Packed", text: "text-indigo-300", bg: "bg-indigo-500/10" },
-  shipped: { label: "Shipped", text: "text-blue-300", bg: "bg-blue-500/10" },
-  out_for_delivery: {
-    label: "Out for Delivery",
-    text: "text-purple-300",
-    bg: "bg-purple-500/10",
-  },
-  delivered: {
-    label: "Delivered",
-    text: "text-emerald-300",
-    bg: "bg-emerald-500/10",
-  },
-};
-
-const orderStatusOptions = [
-  { value: "pending", label: "Pending" },
-  { value: "approved", label: "Approved" },
-  { value: "rejected", label: "Rejected" },
-  { value: "cancelled", label: "Cancelled" },
-];
-
-const orderStatusSelectStyle = {
-  pending:
-    "border-yellow-500/40 text-yellow-400 bg-yellow-500/10 focus:ring-yellow-500/40",
-  approved:
-    "border-emerald-500/40 text-emerald-400 bg-emerald-500/10 focus:ring-emerald-500/40",
-  rejected:
-    "border-rose-500/40 text-rose-400 bg-rose-500/10 focus:ring-rose-500/40",
-  cancelled: "border-white/20 text-[#F5F5F5]/60 bg-white/5 focus:ring-white/20",
-};
-
-const deliverySteps = [
-  { value: "order_received", label: "Order Received" },
-  { value: "packed", label: "Packed" },
-  { value: "shipped", label: "Shipped" },
-  { value: "out_for_delivery", label: "Out for Delivery" },
-  { value: "delivered", label: "Delivered" },
-];
-
-function getRecommendation(history) {
-  const { delivered, cancelled, returned } = history;
-  const total = delivered + cancelled + returned;
-  if (total === 0) {
-    return {
-      label: "Needs Verification",
-      text: "text-yellow-400",
-      bg: "bg-yellow-500/10",
-      border: "border-yellow-500/30",
-      note: "No courier history found for this customer yet.",
-    };
-  }
-  const failRate = (cancelled + returned) / total;
-  if (failRate <= 0.2) {
-    return {
-      label: "Trusted Customer",
-      text: "text-emerald-400",
-      bg: "bg-emerald-500/10",
-      border: "border-emerald-500/30",
-      note: "Strong delivery acceptance history. Safe to approve.",
-    };
-  }
-  if (failRate <= 0.5) {
-    return {
-      label: "Needs Verification",
-      text: "text-yellow-400",
-      bg: "bg-yellow-500/10",
-      border: "border-yellow-500/30",
-      note: "Mixed history. Consider calling to confirm before shipping.",
-    };
-  }
-  return {
-    label: "Review Required",
-    text: "text-rose-400",
-    bg: "bg-rose-500/10",
-    border: "border-rose-500/30",
-    note: "High cancellation/return rate. Verify carefully before approving.",
-  };
-}
-
-function VerificationBadge({ status }) {
-  const c = verificationConfig[status];
-  return (
-    <span
-      className={`inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-medium ${c.bg} ${c.text}`}
-    >
-      <span className={`h-1.5 w-1.5 ${c.dot}`} />
-      {c.label}
-    </span>
-  );
-}
-
-function DeliveryBadge({ status }) {
-  const c = deliveryConfig[status];
-  return (
-    <span
-      className={`inline-flex items-center px-2.5 py-1 text-xs font-medium ${c.bg} ${c.text}`}
-    >
-      {c.label}
-    </span>
-  );
-}
-
-function OrderDrawer({ order, onClose, onUpdateDeliveryStatus, onDecision }) {
-  const [draftDelivery, setDraftDelivery] = useState(order.deliveryStatus);
-  const recommendation = getRecommendation(order.courierHistory);
-  const currentStepIndex = deliverySteps.findIndex(
-    (s) => s.value === order.deliveryStatus,
-  );
-
-  function handleSave() {
-    onUpdateDeliveryStatus(order.id, draftDelivery);
-  }
-
-  return (
-    <div className="fixed inset-0 z-50 flex justify-end">
-      <div className="absolute inset-0 bg-black/60" onClick={onClose} />
-
-      <div className="relative flex h-full w-full max-w-md flex-col bg-[#0F0F0F] border-l border-white/10 shadow-xl">
-        <div className="flex items-center justify-between border-b border-white/10 px-5 py-4">
-          <div>
-            <h2 className="text-base font-semibold text-[#F5F5F5]">
-              {order.id}
-            </h2>
-            <p className="text-xs text-[#F5F5F5]/40">Order details</p>
-          </div>
-          <button
-            onClick={onClose}
-            className="p-1.5 text-[#F5F5F5]/40 hover:bg-white/5 hover:text-[#F5F5F5]"
-            aria-label="Close"
-          >
-            ✕
-          </button>
-        </div>
-
-        <div className="flex-1 overflow-y-auto px-5 py-5 space-y-6">
-          {/* Customer Information */}
-          <section>
-            <h3 className="text-xs font-semibold uppercase tracking-wide text-[#F5F5F5]/40 mb-2">
-              Customer Information
-            </h3>
-            <div className="border border-white/10 p-3 text-sm space-y-1">
-              <p className="font-medium text-[#F5F5F5]">{order.customer}</p>
-              <p className="text-[#F5F5F5]/70">{order.phone}</p>
-              <p className="text-[#F5F5F5]/40">{order.address}</p>
-            </div>
-          </section>
-
-          {/* Courier History */}
-          <section>
-            <h3 className="text-xs font-semibold uppercase tracking-wide text-[#F5F5F5]/40 mb-2">
-              Courier History
-            </h3>
-            <div className="grid grid-cols-3 gap-2">
-              <div className="bg-emerald-500/10 px-3 py-2 text-center">
-                <p className="text-lg font-semibold text-emerald-400">
-                  {order.courierHistory.delivered}
-                </p>
-                <p className="text-[11px] text-emerald-400/70">Delivered</p>
-              </div>
-              <div className="bg-rose-500/10 px-3 py-2 text-center">
-                <p className="text-lg font-semibold text-rose-400">
-                  {order.courierHistory.cancelled}
-                </p>
-                <p className="text-[11px] text-rose-400/70">Cancelled</p>
-              </div>
-              <div className="bg-yellow-500/10 px-3 py-2 text-center">
-                <p className="text-lg font-semibold text-yellow-400">
-                  {order.courierHistory.returned}
-                </p>
-                <p className="text-[11px] text-yellow-400/70">Returned</p>
-              </div>
-            </div>
-          </section>
-
-          {/* Recommendation */}
-          <section>
-            <h3 className="text-xs font-semibold uppercase tracking-wide text-[#F5F5F5]/40 mb-2">
-              Recommendation
-            </h3>
-            <div
-              className={`border px-3 py-2.5 ${recommendation.bg} ${recommendation.border}`}
-            >
-              <p className={`text-sm font-semibold ${recommendation.text}`}>
-                {recommendation.label}
-              </p>
-              <p className="mt-0.5 text-xs text-[#F5F5F5]/50">
-                {recommendation.note}
-              </p>
-            </div>
-          </section>
-
-          {/* Tracking Timeline */}
-          <section>
-            <h3 className="text-xs font-semibold uppercase tracking-wide text-[#F5F5F5]/40 mb-2">
-              Tracking Timeline
-            </h3>
-            <ol className="space-y-3">
-              {deliverySteps.map((step, i) => {
-                const done = i <= currentStepIndex;
-                return (
-                  <li key={step.value} className="flex items-center gap-3">
-                    <span
-                      className={`flex h-5 w-5 flex-none items-center justify-center text-[10px] ${done
-                          ? "bg-yellow-500 text-black"
-                          : "bg-white/10 text-[#F5F5F5]/30"
-                        }`}
-                    >
-                      {done ? "✓" : ""}
-                    </span>
-                    <span
-                      className={`text-sm ${done ? "text-[#F5F5F5]" : "text-[#F5F5F5]/30"}`}
-                    >
-                      {step.label}
-                    </span>
-                  </li>
-                );
-              })}
-            </ol>
-          </section>
-
-          {/* Update Delivery Status */}
-          <section>
-            <h3 className="text-xs font-semibold uppercase tracking-wide text-[#F5F5F5]/40 mb-2">
-              Update Delivery Status
-            </h3>
-            <select
-              value={draftDelivery}
-              onChange={(e) => setDraftDelivery(e.target.value)}
-              className="w-full border border-white/15 bg-white/5 px-3 py-2 text-sm text-[#F5F5F5] outline-none focus:ring-2 focus:ring-yellow-500/40"
-            >
-              {deliverySteps.map((step) => (
-                <option
-                  key={step.value}
-                  value={step.value}
-                  className="bg-[#0F0F0F]"
-                >
-                  {step.label}
-                </option>
-              ))}
-            </select>
-          </section>
-        </div>
-
-        <div className="border-t border-white/10 px-5 py-4 space-y-2">
-          <button
-            onClick={handleSave}
-            className="w-full bg-yellow-500 py-2 text-sm font-semibold text-black hover:bg-yellow-400"
-          >
-            Save
-          </button>
-          <div className="flex gap-2">
-            <button
-              onClick={() => onDecision(order.id, "approved")}
-              className="flex-1 border border-emerald-500/30 bg-emerald-500/10 py-2 text-sm font-medium text-emerald-400 hover:bg-emerald-500/20"
-            >
-              Approve
-            </button>
-            <button
-              onClick={() => onDecision(order.id, "rejected")}
-              className="flex-1 border border-rose-500/30 bg-rose-500/10 py-2 text-sm font-medium text-rose-400 hover:bg-rose-500/20"
-            >
-              Reject
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function getStatusFromUrl() {
-  if (typeof window === "undefined") return "all";
-  const params = new URLSearchParams(window.location.search);
-  return params.get("status") || "all";
-}
+const tabs = ["All", "Pending", "Approved", "Rejected", "Cancelled"];
+const deliverySteps = ["Order Received", "Packed", "Shipped", "Out for Delivery", "Delivered"];
+const gridCols = "md:grid-cols-[1fr_1.3fr_1.2fr_1.2fr_1.2fr_0.8fr]";
 
 export default function OrdersPage() {
-  const [orders, setOrders] = useState(initialOrders);
-  const [selectedOrderId, setSelectedOrderId] = useState(null);
-  const [activeTab, setActiveTab] = useState("all");
-
-  // Read ?status= from the URL once mounted, and keep in sync with back/forward navigation.
-  useEffect(() => {
-    setActiveTab(getStatusFromUrl());
-    function handlePopState() {
-      setActiveTab(getStatusFromUrl());
-    }
-    window.addEventListener("popstate", handlePopState);
-    return () => window.removeEventListener("popstate", handlePopState);
-  }, []);
-
-  const selectedOrder = orders.find((o) => o.id === selectedOrderId) || null;
-  const filteredOrders =
-    activeTab === "all"
-      ? orders
-      : orders.filter((o) => o.orderStatus === activeTab);
-
-  function goToTab(value) {
-    const params = new URLSearchParams(window.location.search);
-    if (value === "all") {
-      params.delete("status");
-    } else {
-      params.set("status", value);
-    }
-    const query = params.toString();
-    const newUrl = `${window.location.pathname}${query ? `?${query}` : ""}`;
-    window.history.pushState({}, "", newUrl);
-    setActiveTab(value);
-  }
-
-  function updateOrderStatus(id, status) {
-    setOrders((prev) =>
-      prev.map((o) => (o.id === id ? { ...o, orderStatus: status } : o)),
-    );
-  }
-
-  function updateDeliveryStatus(id, status) {
-    setOrders((prev) =>
-      prev.map((o) => (o.id === id ? { ...o, deliveryStatus: status } : o)),
-    );
-  }
-
-  function handleDecision(id, status) {
-    updateOrderStatus(id, status);
-    setSelectedOrderId(null);
-  }
+  const { openDrawer } = useDrawer();
 
   return (
     <div className="min-h-screen bg-[#0B0B0B] px-4 py-8 sm:px-8 text-[#F5F5F5]">
@@ -444,144 +77,98 @@ export default function OrdersPage() {
         <div className="mb-6">
           <h1 className="text-xl font-semibold text-[#F5F5F5]">Orders</h1>
           <p className="mt-1 text-sm text-[#F5F5F5]/40">
-            {orders.length} orders · verification runs automatically on new
-            orders
+            {orders.length} orders
           </p>
         </div>
 
-        {/* Tabs */}
+        {/* Tabs (static, non-clickable for now) */}
         <div className="mb-4 flex flex-wrap gap-1 border-b border-white/10">
-          {tabs.map((tab) => {
-            const isActive = activeTab === tab.value;
-            return (
-              <button
-                key={tab.value}
-                onClick={() => goToTab(tab.value)}
-                className={`relative px-4 py-2 text-sm font-medium transition-colors ${isActive
-                    ? "text-yellow-400"
-                    : "text-[#F5F5F5]/40 hover:text-[#F5F5F5]/70"
-                  }`}
-              >
-                {tab.label}
-                {isActive && (
-                  <span className="absolute inset-x-0 -bottom-px h-0.5 bg-yellow-500" />
-                )}
-              </button>
-            );
-          })}
+          {tabs.map((tab, i) => (
+            <span
+              key={tab}
+              className={`relative px-4 py-2 text-sm font-medium ${
+                i === 0 ? "text-yellow-400" : "text-[#F5F5F5]/40"
+              }`}
+            >
+              {tab}
+              {i === 0 && (
+                <span className="absolute inset-x-0 -bottom-px h-0.5 bg-yellow-500" />
+              )}
+            </span>
+          ))}
         </div>
 
         <div className="overflow-hidden border border-white/10 bg-[#111111]">
           <div className="overflow-x-auto">
             <TableContainer>
-
               <TableHeader gridCols={gridCols}>
                 <div>Order ID</div>
                 <div>Customer</div>
                 <div>Phone</div>
                 <div>Verification</div>
-                <div>Order Status</div>
                 <div>Delivery Status</div>
                 <div className="text-right">Action</div>
               </TableHeader>
 
-
-              {filteredOrders.map((order) => (
-                <TableRow
-                  key={order.id}
-                  gridCols={gridCols}
-                >
-                  {/* Order ID */}
+              {orders.map((order) => (
+                <TableRow key={order.id} gridCols={gridCols}>
                   <TableData label="Order ID">
                     <span className="font-medium text-[#F5F5F5]">
                       {order.id}
                     </span>
                   </TableData>
 
-
-                  {/* Customer */}
                   <TableData label="Customer">
                     <span className="text-[#F5F5F5]/80">
                       {order.customer}
                     </span>
                   </TableData>
 
-
-                  {/* Phone */}
                   <TableData label="Phone">
-                    <span className="text-[#F5F5F5]/40">
-                      {order.phone}
+                    <span className="text-[#F5F5F5]/40">{order.phone}</span>
+                  </TableData>
+
+                  <TableData label="Verification">
+                    <span
+                      className={`inline-flex items-center px-2.5 py-1 text-xs font-medium ${
+                        order.verification === "Trusted"
+                          ? "bg-emerald-500/10 text-emerald-400"
+                          : order.verification === "Needs Verification"
+                          ? "bg-yellow-500/10 text-yellow-400"
+                          : "bg-rose-500/10 text-rose-400"
+                      }`}
+                    >
+                      {order.verification}
                     </span>
                   </TableData>
 
-
-                  {/* Verification */}
-                  <TableData label="Verification">
-                    <VerificationBadge status={order.verification} />
-                  </TableData>
-
-
-                  {/* Order Status */}
-                  <TableData label="Order Status">
+                  <TableData label="Delivery Status">
                     <select
-                      value={order.orderStatus}
-                      onChange={(e) =>
-                        updateOrderStatus(order.id, e.target.value)
-                      }
-                      className={`border px-2 py-1.5 text-xs font-medium outline-none focus:ring-2 ${orderStatusSelectStyle[order.orderStatus]}`}
+                      defaultValue={order.deliveryStatus}
+                      className="border border-white/15 bg-white/5 px-2 py-1.5 text-xs font-medium text-[#F5F5F5]/80 outline-none focus:ring-2 focus:ring-yellow-500/40"
                     >
-                      {orderStatusOptions.map((opt) => (
-                        <option
-                          key={opt.value}
-                          value={opt.value}
-                          className="bg-[#111111]"
-                        >
-                          {opt.label}
+                      {deliverySteps.map((step) => (
+                        <option key={step} value={step} className="bg-[#111111]">
+                          {step}
                         </option>
                       ))}
                     </select>
                   </TableData>
 
-
-                  {/* Delivery Status */}
-                  <TableData label="Delivery Status">
-                    <DeliveryBadge status={order.deliveryStatus} />
-                  </TableData>
-
-
-                  {/* Action */}
                   <TableData label="Action" align="right">
                     <button
-                      onClick={() => setSelectedOrderId(order.id)}
+                      onClick={() => openDrawer("order", order)}
                       className="border border-white/15 px-3 py-1.5 text-xs font-medium text-[#F5F5F5]/80 transition-colors hover:bg-white/10"
                     >
                       View
                     </button>
                   </TableData>
-
                 </TableRow>
               ))}
-
-
-              {filteredOrders.length === 0 && (
-                <div className="px-4 py-10 text-center text-sm text-[#F5F5F5]/30">
-                  No orders in this tab.
-                </div>
-              )}
-
             </TableContainer>
           </div>
         </div>
       </div>
-
-      {selectedOrder && (
-        <OrderDrawer
-          order={selectedOrder}
-          onClose={() => setSelectedOrderId(null)}
-          onUpdateDeliveryStatus={updateDeliveryStatus}
-          onDecision={handleDecision}
-        />
-      )}
     </div>
   );
 }
