@@ -1,5 +1,9 @@
 "use client";
 
+import TableContainer from "@/app/components/ui/table/TableContainer";
+import TableData from "@/app/components/ui/table/TableData";
+import TableHeader from "@/app/components/ui/table/TableHeader";
+import TableRow from "@/app/components/ui/table/TableRow";
 import { useEffect, useState } from "react";
 
 const initialOrders = [
@@ -70,7 +74,8 @@ const initialOrders = [
     notes: "",
   },
 ];
-
+const gridCols =
+  "md:grid-cols-[1fr_1.3fr_1.2fr_1.2fr_1.2fr_1fr_0.8fr]";
 const tabs = [
   { value: "all", label: "All" },
   { value: "pending", label: "Pending" },
@@ -308,11 +313,10 @@ function OrderDrawer({ order, onClose, onUpdateDeliveryStatus, onDecision }) {
                 return (
                   <li key={step.value} className="flex items-center gap-3">
                     <span
-                      className={`flex h-5 w-5 flex-none items-center justify-center text-[10px] ${
-                        done
+                      className={`flex h-5 w-5 flex-none items-center justify-center text-[10px] ${done
                           ? "bg-yellow-500 text-black"
                           : "bg-white/10 text-[#F5F5F5]/30"
-                      }`}
+                        }`}
                     >
                       {done ? "✓" : ""}
                     </span>
@@ -453,11 +457,10 @@ export default function OrdersPage() {
               <button
                 key={tab.value}
                 onClick={() => goToTab(tab.value)}
-                className={`relative px-4 py-2 text-sm font-medium transition-colors ${
-                  isActive
+                className={`relative px-4 py-2 text-sm font-medium transition-colors ${isActive
                     ? "text-yellow-400"
                     : "text-[#F5F5F5]/40 hover:text-[#F5F5F5]/70"
-                }`}
+                  }`}
               >
                 {tab.label}
                 {isActive && (
@@ -470,78 +473,103 @@ export default function OrdersPage() {
 
         <div className="overflow-hidden border border-white/10 bg-[#111111]">
           <div className="overflow-x-auto">
-            <table className="w-full min-w-205 text-left text-sm">
-              <thead>
-                <tr className="border-b border-white/10 bg-white/3 text-xs uppercase tracking-wide text-[#F5F5F5]/40">
-                  <th className="px-4 py-3 font-medium">Order ID</th>
-                  <th className="px-4 py-3 font-medium">Customer</th>
-                  <th className="px-4 py-3 font-medium">Phone</th>
-                  <th className="px-4 py-3 font-medium">Verification</th>
-                  <th className="px-4 py-3 font-medium">Order Status</th>
-                  <th className="px-4 py-3 font-medium">Delivery Status</th>
-                  <th className="px-4 py-3 font-medium text-right">Action</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-white/5">
-                {filteredOrders.map((order) => (
-                  <tr key={order.id} className="hover:bg-white/3">
-                    <td className="px-4 py-3 font-medium text-[#F5F5F5]">
-                      {order.id}
-                    </td>
-                    <td className="px-4 py-3 text-[#F5F5F5]/80">
-                      {order.customer}
-                    </td>
-                    <td className="px-4 py-3 text-[#F5F5F5]/40">
-                      {order.phone}
-                    </td>
-                    <td className="px-4 py-3">
-                      <VerificationBadge status={order.verification} />
-                    </td>
-                    <td className="px-4 py-3">
-                      <select
-                        value={order.orderStatus}
-                        onChange={(e) =>
-                          updateOrderStatus(order.id, e.target.value)
-                        }
-                        className={`border px-2 py-1.5 text-xs font-medium outline-none focus:ring-2 ${orderStatusSelectStyle[order.orderStatus]}`}
-                      >
-                        {orderStatusOptions.map((opt) => (
-                          <option
-                            key={opt.value}
-                            value={opt.value}
-                            className="bg-[#111111]"
-                          >
-                            {opt.label}
-                          </option>
-                        ))}
-                      </select>
-                    </td>
-                    <td className="px-4 py-3">
-                      <DeliveryBadge status={order.deliveryStatus} />
-                    </td>
-                    <td className="px-4 py-3 text-right">
-                      <button
-                        onClick={() => setSelectedOrderId(order.id)}
-                        className="border border-white/15 px-3 py-1.5 text-xs font-medium text-[#F5F5F5]/80 transition-colors hover:bg-white/10"
-                      >
-                        View
-                      </button>
-                    </td>
-                  </tr>
-                ))}
+            <TableContainer>
 
-                {filteredOrders.length === 0 && (
-                  <tr>
-                    <td
-                      colSpan={7}
-                      className="px-4 py-10 text-center text-sm text-[#F5F5F5]/30"
+              <TableHeader gridCols={gridCols}>
+                <div>Order ID</div>
+                <div>Customer</div>
+                <div>Phone</div>
+                <div>Verification</div>
+                <div>Order Status</div>
+                <div>Delivery Status</div>
+                <div className="text-right">Action</div>
+              </TableHeader>
+
+
+              {filteredOrders.map((order) => (
+                <TableRow
+                  key={order.id}
+                  gridCols={gridCols}
+                >
+                  {/* Order ID */}
+                  <TableData label="Order ID">
+                    <span className="font-medium text-[#F5F5F5]">
+                      {order.id}
+                    </span>
+                  </TableData>
+
+
+                  {/* Customer */}
+                  <TableData label="Customer">
+                    <span className="text-[#F5F5F5]/80">
+                      {order.customer}
+                    </span>
+                  </TableData>
+
+
+                  {/* Phone */}
+                  <TableData label="Phone">
+                    <span className="text-[#F5F5F5]/40">
+                      {order.phone}
+                    </span>
+                  </TableData>
+
+
+                  {/* Verification */}
+                  <TableData label="Verification">
+                    <VerificationBadge status={order.verification} />
+                  </TableData>
+
+
+                  {/* Order Status */}
+                  <TableData label="Order Status">
+                    <select
+                      value={order.orderStatus}
+                      onChange={(e) =>
+                        updateOrderStatus(order.id, e.target.value)
+                      }
+                      className={`border px-2 py-1.5 text-xs font-medium outline-none focus:ring-2 ${orderStatusSelectStyle[order.orderStatus]}`}
                     >
-                      No orders in this tab.
-                    </td>
-                  </tr>
-                )}
-              </tbody>
-            </table>
+                      {orderStatusOptions.map((opt) => (
+                        <option
+                          key={opt.value}
+                          value={opt.value}
+                          className="bg-[#111111]"
+                        >
+                          {opt.label}
+                        </option>
+                      ))}
+                    </select>
+                  </TableData>
+
+
+                  {/* Delivery Status */}
+                  <TableData label="Delivery Status">
+                    <DeliveryBadge status={order.deliveryStatus} />
+                  </TableData>
+
+
+                  {/* Action */}
+                  <TableData label="Action" align="right">
+                    <button
+                      onClick={() => setSelectedOrderId(order.id)}
+                      className="border border-white/15 px-3 py-1.5 text-xs font-medium text-[#F5F5F5]/80 transition-colors hover:bg-white/10"
+                    >
+                      View
+                    </button>
+                  </TableData>
+
+                </TableRow>
+              ))}
+
+
+              {filteredOrders.length === 0 && (
+                <div className="px-4 py-10 text-center text-sm text-[#F5F5F5]/30">
+                  No orders in this tab.
+                </div>
+              )}
+
+            </TableContainer>
           </div>
         </div>
       </div>
