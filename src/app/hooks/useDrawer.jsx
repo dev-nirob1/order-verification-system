@@ -7,6 +7,6 @@ const useDrawer = () => {
     throw new Error("useCheckout must be used inside CheckoutProvider");
    }
    return context;
-};
+}; 
 
 export default useDrawer;

@@ -1,104 +1,87 @@
-"use client";
-
-import { useEffect, useState } from "react";
-
-const STEPS = [
-  { key: "received", label: "Order Received" },
-  { key: "processing", label: "Processing" },
-  { key: "out_for_delivery", label: "Out for Delivery" },
-  { key: "delivered", label: "Delivered" },
+'use client'
+const steps = [
+  { title: "Order Confirmed", detail: "08 July 2026, 4:10 PM", state: "done" },
+  { title: "Out for Delivery", detail: "Your order is on the way.", state: "current" },
+  { title: "Delivered", detail: "Not yet delivered", state: "pending" },
 ];
 
-export default function TrackOrder() {
-  const [order, setOrder] = useState(null);
-
-  useEffect(() => {
-    // TODO: replace with GET /api/orders/me
-    setOrder({
-      id: "ORD-10293",
-      currentStep: "out_for_delivery", // received | processing | out_for_delivery | delivered
-      eta: "Jul 09, 2026",
-      timestamps: {
-        received: "Jul 05, 10:20 AM",
-        processing: "Jul 06, 2:15 PM",
-        out_for_delivery: "Jul 07, 8:00 AM",
-      },
-    });
-  }, []);
-
+const TrackOrderPage = () => {
   return (
     <div className="space-y-6">
+      {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold text-white">Track Order</h1>
-        <p className="mt-2 text-neutral-400">Here's the live status of your recent order.</p>
+        <h1 className="text-xl font-semibold text-[#F5F5F5]">Track Order</h1>
+        <p className="mt-1 text-sm text-[#F5F5F5]/40">
+          Live status of your current order.
+        </p>
       </div>
 
-      <div className="rounded-lg border border-white/10 bg-[#111] p-6">
-        {!order ? (
-          <p className="text-sm text-neutral-400">Loading your order status...</p>
-        ) : (
-          <div className="mt-2 rounded-lg border border-yellow-500/20 bg-yellow-500/10 p-4">
-            <div className="flex items-center justify-between">
-              <p className="font-semibold text-yellow-500">Order #{order.id}</p>
-              {order.eta && (
-                <p className="text-xs text-neutral-400">Estimated: {order.eta}</p>
-              )}
+      {/* Order Summary Bar */}
+      <div className="flex flex-col gap-3 border border-white/10 p-4 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <p className="text-xs uppercase tracking-wide text-[#F5F5F5]/40">Order ID</p>
+          <p className="font-medium text-[#F5F5F5]">ORD-10245</p>
+        </div>
+        <div>
+          <p className="text-xs uppercase tracking-wide text-[#F5F5F5]/40">Expected Delivery</p>
+          <p className="font-medium text-[#F5F5F5]">12 July 2026</p>
+        </div>
+        <span className="inline-flex items-center bg-yellow-500/10 px-3 py-1 text-sm font-medium text-yellow-400">
+          Processing
+        </span>
+      </div>
+
+      {/* Tracking Timeline */}
+      <div className="border border-white/10 p-6">
+        <h3 className="mb-6 text-xs font-semibold uppercase tracking-wide text-[#F5F5F5]/40">
+          Order Progress
+        </h3>
+
+        <div className="relative space-y-8 pl-8">
+          <div className="absolute left-1.75 top-1 bottom-1 w-px bg-white/10" />
+
+          {steps.map((step) => (
+            <div className="relative" key={step.title}>
+              <span
+                className={`absolute -left-8 top-0.5 h-3.5 w-3.5 ${
+                  step.state === "done"
+                    ? "bg-yellow-500"
+                    : step.state === "current"
+                    ? "border-2 border-yellow-500 bg-black"
+                    : "border border-white/20 bg-transparent"
+                }`}
+              />
+              <p
+                className={`text-sm font-medium ${
+                  step.state === "pending" ? "text-[#F5F5F5]/40" : "text-[#F5F5F5]"
+                }`}
+              >
+                {step.title}
+              </p>
+              <p
+                className={`mt-0.5 text-xs ${
+                  step.state === "pending" ? "text-[#F5F5F5]/25" : "text-[#F5F5F5]/40"
+                }`}
+              >
+                {step.detail}
+              </p>
             </div>
+          ))}
+        </div>
+      </div>
 
-            <div className="mt-5 flex items-start justify-between">
-              {STEPS.map((step, index) => {
-                const currentIndex = STEPS.findIndex((s) => s.key === order.currentStep);
-                const isDone = index < currentIndex;
-                const isCurrent = index === currentIndex;
-                const isUpcoming = index > currentIndex;
-
-                return (
-                  <div key={step.key} className="flex flex-1 flex-col items-center text-center">
-                    <div className="flex w-full items-center">
-                      <div
-                        className={`h-0.5 flex-1 ${
-                          index === 0
-                            ? "opacity-0"
-                            : index <= currentIndex
-                            ? "bg-yellow-500"
-                            : "bg-white/10"
-                        }`}
-                      />
-                      <div
-                        className={`mx-2 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border-2 ${
-                          isDone
-                            ? "border-yellow-500 bg-yellow-500"
-                            : isCurrent
-                            ? "border-yellow-500 bg-[#0b0b0b] animate-pulse"
-                            : "border-white/20 bg-[#0b0b0b]"
-                        }`}
-                      >
-                        {isDone && <span className="text-[10px] font-bold text-black">✓</span>}
-                      </div>
-                      <div
-                        className={`h-0.5 flex-1 ${
-                          index === STEPS.length - 1
-                            ? "opacity-0"
-                            : index < currentIndex
-                            ? "bg-yellow-500"
-                            : "bg-white/10"
-                        }`}
-                      />
-                    </div>
-
-                    <p className={`mt-2 text-xs font-medium ${isUpcoming ? "text-neutral-500" : "text-white"}`}>
-                      {step.label}
-                    </p>
-                    {order.timestamps?.[step.key] && (
-                      <p className="mt-1 text-[11px] text-neutral-500">{order.timestamps[step.key]}</p>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        )}
+      {/* Shipping Info */}
+      <div className="border border-white/10 p-4">
+        <h3 className="mb-2 text-xs font-semibold uppercase tracking-wide text-[#F5F5F5]/40">
+          Delivery Address
+        </h3>
+        <p className="text-sm font-medium text-[#F5F5F5]">Al Hasan Nirob</p>
+        <p className="mt-1 text-sm text-[#F5F5F5]/40">
+          House 12, Road 4, Dhanmondi, Dhaka
+        </p>
       </div>
     </div>
   );
-}
+};
+
+export default TrackOrderPage;
