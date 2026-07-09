@@ -1,5 +1,4 @@
-
-export default function SettingsPage() {
+const SettingsPage = () => {
   return (
     <div className="min-h-screen bg-[#0B0B0B] px-4 py-8 sm:px-8 text-[#F5F5F5]">
       <div className="mx-auto max-w-6xl">
@@ -18,11 +17,13 @@ export default function SettingsPage() {
             Coming soon
           </h2>
           <p className="mt-2 max-w-sm text-sm text-[#F5F5F5]/40">
-            Settings are being worked on. Check back later for verification
-            rules, account, notification, and courier options.
+            Settings are being worked on. Check back later for store profile,
+            payment, courier, and notification options.
           </p>
         </div>
       </div>
     </div>
   );
-}
+};
+
+export default SettingsPage;
