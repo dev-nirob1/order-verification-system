@@ -1,7 +1,25 @@
 "use client";
 
 import Link from "next/link";
-import { FiPackage, FiMapPin } from "react-icons/fi";
+import { FiPackage, FiMapPin, FiShoppingBag, FiTruck } from "react-icons/fi";
+
+const stats = [
+  {
+    title: "Active Orders",
+    value: "2",
+    icon: FiShoppingBag,
+  },
+  {
+    title: "Total Orders",
+    value: "8",
+    icon: FiPackage,
+  },
+  {
+    title: "Last Order Status",
+    value: "Processing",
+    icon: FiTruck,
+  },
+];
 
 const quickLinks = [
   {
@@ -18,7 +36,7 @@ const quickLinks = [
   },
 ];
 
-export default function UsersDashboardPage() {
+const UsersDashboardPage = () => {
   return (
     <div className="space-y-8">
       <div>
@@ -28,6 +46,30 @@ export default function UsersDashboardPage() {
         </p>
       </div>
 
+      {/* Order Snapshot */}
+      <div className="grid gap-5 md:grid-cols-3">
+        {stats.map((item) => {
+          const Icon = item.icon;
+
+          return (
+            <div key={item.title} className="border border-white/10 bg-[#111] p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm text-neutral-400">{item.title}</p>
+                  <h2 className="mt-2 text-3xl font-bold text-white">
+                    {item.value}
+                  </h2>
+                </div>
+                <div className="bg-yellow-500/10 p-3 text-yellow-500">
+                  <Icon size={22} />
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Quick Links */}
       <div className="grid gap-5 md:grid-cols-2">
         {quickLinks.map((item) => {
           const Icon = item.icon;
@@ -36,15 +78,19 @@ export default function UsersDashboardPage() {
             <Link
               key={item.title}
               href={item.href}
-              className="rounded-lg border border-white/10 bg-[#111] p-6 transition hover:border-yellow-500/40 hover:bg-[#151515]"
+              className="border border-white/10 bg-[#111] p-6 transition hover:border-yellow-500/40 hover:bg-[#151515]"
             >
               <div className="flex items-center gap-4">
-                <div className="rounded-lg bg-yellow-500/10 p-3 text-yellow-500">
+                <div className="bg-yellow-500/10 p-3 text-yellow-500">
                   <Icon size={22} />
                 </div>
                 <div>
-                  <h2 className="text-xl font-semibold text-white">{item.title}</h2>
-                  <p className="mt-1 text-sm text-neutral-400">{item.description}</p>
+                  <h2 className="text-xl font-semibold text-white">
+                    {item.title}
+                  </h2>
+                  <p className="mt-1 text-sm text-neutral-400">
+                    {item.description}
+                  </p>
                 </div>
               </div>
             </Link>
@@ -53,4 +99,6 @@ export default function UsersDashboardPage() {
       </div>
     </div>
   );
-}
+};
+
+export default UsersDashboardPage;
