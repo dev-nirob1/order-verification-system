@@ -3,6 +3,7 @@
 import useDrawer from "@/app/hooks/useDrawer";
 import CustomerDrawer from "./CustomerDrawer";
 import OrdersDrawer from "./OrdersDrawer";
+import MyOrderDrawer from "./MyOrderDrawer";
 
 const Drawer =()=> {
   const { drawer, closeDrawer } = useDrawer();
@@ -39,6 +40,7 @@ const Drawer =()=> {
             <CustomerDrawer customer={drawer.data} />
           )}
           {drawer.type === "order" && <OrdersDrawer order={drawer.data} />}
+          {drawer.type === "my-order" && <MyOrderDrawer order={drawer.data} />}
         </div>
       </div>
     </div>
