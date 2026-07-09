@@ -25,37 +25,38 @@ const Footer = () => {
             <h3 className="text-lg font-semibold text-white mb-4">
               Navigation
             </h3>
-            <ul className="space-y-2">
+            <ul className="space-y-3">
               <li>
                 <Link
-                  href="#"
+                  href="/"
                   className="text-white/70 hover:text-yellow-500 transition duration-300"
                 >
-                  Home{" "}
+                  Home
                 </Link>
               </li>
-              <li>
-                <Link
-                  href="#"
-                  className="text-white/70 hover:text-yellow-500 transition duration-300"
-                >
-                  About{" "}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="#"
-                  className="text-white/70 hover:text-yellow-500 transition duration-300"
-                >
-                  Services{" "}
-                </Link>
-              </li>
+              
               <li>
                 <Link
                   href="#"
                   className="text-white/70 hover:text-yellow-500 transition duration-300"
                 >
                   Contact
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/track-order"
+                  className="text-white/70 hover:text-yellow-500 transition duration-300"
+                >
+                  Track Order
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/login"
+                  className="text-white/70 hover:text-yellow-500 transition duration-300"
+                >
+                  Login
                 </Link>
               </li>
             </ul>
